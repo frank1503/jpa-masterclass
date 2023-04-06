@@ -9,7 +9,7 @@ public class Person {
     private LocalDate dateOfBirth;
     private Gender gender;
 
-    public Person(int id, String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {//}, Address address) {
+    public Person(int id, String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -65,8 +65,6 @@ public class Person {
                 ", lastName='" + lastName + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", gender=" + gender +
-                //", address=" + address +
-                //", car=" + car +
                 '}';
     }
 }
