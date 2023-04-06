@@ -1,3 +1,3 @@
 # README #
 
-Bla bla bla
+Welkom bij de JPA masterclass
