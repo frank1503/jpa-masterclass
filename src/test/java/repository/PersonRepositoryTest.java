@@ -53,6 +53,7 @@ class PersonRepositoryTest {
         assertThat(createdPerson.getGender()).isEqualTo(Gender.FEMALE);
 
         Address createdAddress = person.getAddress();
+        assertThat(createdAddress).isNotNull();
         assertThat(createdAddress.getStreetName()).isEqualTo("Dorpstraat");
         assertThat(createdAddress.getHouseNumber()).isEqualTo("1a");
         assertThat(createdAddress.getZipCode()).isEqualTo("5504HK");
@@ -87,37 +88,39 @@ class PersonRepositoryTest {
         assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
     }
 
-    //TODO 4f test moet slagen
+    //TODO 4f test moet slagen. Mocht de test falen, voer dan deletePersonCar.sql uit. Deze verwijdert de person en car van deze test.
     @Test
     void shouldCreatePersonWithCar() throws SQLException {
         Car car = new Car(2, "Ferrari", "Rood", "HH-DF-33");
         Address address = new Address("Voorterweg", "172", "5611TT", "Eindhoven", "Nederland");
-        Person person = new Person(3, "Carlos", "Sainz", LocalDate.parse("1990-08-29"), Gender.MALE, address);
+        Person person = new Person(4, "Carlos", "Sainz", LocalDate.parse("1990-08-29"), Gender.MALE, address);
         person.setCar(car);
 
         repository.createPerson(person);
-        Person createdPerson = repository.readPerson(3);
+        Person createdPerson = repository.readPerson(4);
         assertThat(createdPerson).isNotNull();
-        assertThat(createdPerson.getFirstName()).isEqualTo("Gerda");
-        assertThat(createdPerson.getLastName()).isEqualTo("Janssen");
-        assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1974-08-29"));
-        assertThat(createdPerson.getGender()).isEqualTo(Gender.FEMALE);
+        assertThat(createdPerson.getFirstName()).isEqualTo("Carlos");
+        assertThat(createdPerson.getLastName()).isEqualTo("Sainz");
+        assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1990-08-29"));
+        assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
 
         Address createdAddress = person.getAddress();
-        assertThat(createdAddress.getStreetName()).isEqualTo("Dorpstraat");
-        assertThat(createdAddress.getHouseNumber()).isEqualTo("1a");
-        assertThat(createdAddress.getZipCode()).isEqualTo("5504HK");
-        assertThat(createdAddress.getCity()).isEqualTo("Veldhoven");
+        assertThat(createdAddress).isNotNull();
+        assertThat(createdAddress.getStreetName()).isEqualTo("Voorterweg");
+        assertThat(createdAddress.getHouseNumber()).isEqualTo("172");
+        assertThat(createdAddress.getZipCode()).isEqualTo("5611TT");
+        assertThat(createdAddress.getCity()).isEqualTo("Eindhoven");
         assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
 
         Car createdCar = createdPerson.getCar();
+        assertThat(createdCar).isNotNull();
         assertThat(createdCar.getId()).isEqualTo(2);
         assertThat(createdCar.getType()).isEqualTo("Ferrari");
         assertThat(createdCar.getColor()).isEqualTo("Rood");
         assertThat(createdCar.getRegistrationPlate()).isEqualTo("HH-DF-33");
     }
 
-    //TODO 4h test moet slagen
+    //TODO 4h test moet slagen. Mocht de test falen, voer dan deletePersonCar.sql uit en voer shouldCreatePersonWithCar eerst uit
     @Test
     void shouldDelete() throws SQLException {
         Person person = repository.readPerson(3);
