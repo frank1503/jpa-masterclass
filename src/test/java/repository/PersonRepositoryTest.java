@@ -123,12 +123,12 @@ class PersonRepositoryTest {
     //TODO 4h test moet slagen. Mocht de test falen, voer dan deletePersonCar.sql uit en voer shouldCreatePersonWithCar eerst uit
     @Test
     void shouldDelete() throws SQLException {
-        Person person = repository.readPerson(3);
+        Person person = repository.readPerson(4);
         repository.deletePerson(person);
-        Person deletedPerson = repository.readPerson(3);
+        Person deletedPerson = repository.readPerson(person.getId());
         assertThat(deletedPerson).isNull();
 
-        Car deletedCar = testRepository.getCar(2);
+        Car deletedCar = testRepository.getCar(person.getCar().getId());
         assertThat(deletedCar).isNull();
     }
 }
