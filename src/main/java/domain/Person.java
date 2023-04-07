@@ -9,6 +9,7 @@ public class Person {
     private LocalDate dateOfBirth;
     private Gender gender;
     private Address address;
+    private Car car;
 
     public Person(int id, String firstName, String lastName, LocalDate dateOfBirth, Gender gender, Address address) {
         this.id = id;
@@ -67,6 +68,14 @@ public class Person {
         this.address = address;
     }
 
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -76,6 +85,7 @@ public class Person {
                 ", dateOfBirth=" + dateOfBirth +
                 ", gender=" + gender +
                 ", address=" + address +
+                ", car=" + car +
                 '}';
     }
 }

@@ -7,6 +7,16 @@ import domain.Person;
 import java.sql.*;
 import java.time.LocalDate;
 
+//TODO 4 In deze opdracht gaan we een Car object toevoegen en een aparte tabel maken voor dit object.
+// Op het person object voegen we een Car toe en in de database krijgt de person tabel een verwijzing naar car (car_id)
+
+//TODO 4a maak de nieuwe car tabel:
+// - id
+// - type
+// - color
+// - registration_plate
+// voeg kolom car_id toe aan de person tabel
+// tot slot, voer car.sql script uit
 public class PersonRepository {
     private static final String URL = "jdbc:postgresql://localhost:5432/jpa";
     private static final String USER_NAME = "postgres";
@@ -15,6 +25,7 @@ public class PersonRepository {
     public Person readPerson(int primaryKey) throws SQLException {
         Person person = null;
 
+        //TODO 4b pas de query aan zodat ook de car wordt opgehaald als deze er is
         String sql = "select * from person p where p.id = ?";
 
         try (
@@ -37,6 +48,8 @@ public class PersonRepository {
                     String city = resultSet.getString(9);
                     String country = resultSet.getString(10);
 
+                    //TODO 4c haal uit de resultSet de velden voor Car en zorg ervoor dat Car wordt geset op Person
+
                     Address address = new Address(streetName, houseNumber, zipCode, city, country);
                     person = new Person(id, firstName, lastName, dateOfBirth, gender, address);
                 }
@@ -45,6 +58,7 @@ public class PersonRepository {
         }
     }
 
+    //TODO 4e zorg ervoor dat als een Person wordt opgeslagen ook de bijbehorende auto wordt opgeslagen
     public void createPerson(Person person) throws SQLException {
         String sql = "insert into person values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -108,14 +122,15 @@ public class PersonRepository {
         }
     }
 
-    public void deletePerson(int primaryKey) throws SQLException {
+    //TODO 4g zorg ervoor dat als een person een car heeft, deze ook wordt verwijderd
+    public void deletePerson(Person person) throws SQLException {
         String sql = "delete from person where id = ?";
 
         try (
                 Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ) {
-            preparedStatement.setInt(1, primaryKey);
+            preparedStatement.setInt(1, person.getId());
 
             preparedStatement.executeUpdate();
         }

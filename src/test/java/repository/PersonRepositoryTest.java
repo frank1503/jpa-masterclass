@@ -1,10 +1,9 @@
 package repository;
 
 import domain.Address;
+import domain.Car;
 import domain.Gender;
 import domain.Person;
-import org.assertj.core.internal.cglib.core.Local;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -14,7 +13,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class PersonRepositoryTest {
     private final PersonRepository repository = new PersonRepository();
+    private final CarRepoForTest testRepository = new CarRepoForTest();
 
+    //TODO 4d test moet slagen
     @Test
     void shouldReadPerson() throws SQLException {
         Person person = repository.readPerson(1);
@@ -30,6 +31,13 @@ class PersonRepositoryTest {
         assertThat(address.getZipCode()).isEqualTo("5632CZ");
         assertThat(address.getCity()).isEqualTo("Eindhoven");
         assertThat(address.getCountry()).isEqualTo("Nederland");
+
+        Car car = person.getCar();
+        assertThat(car).isNotNull();
+        assertThat(car.getId()).isEqualTo(1);
+        assertThat(car.getType()).isEqualTo("Seat");
+        assertThat(car.getColor()).isEqualTo("Blauw");
+        assertThat(car.getRegistrationPlate()).isEqualTo("P-468-LJ");
     }
 
     @Test
@@ -79,10 +87,45 @@ class PersonRepositoryTest {
         assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
     }
 
+    //TODO 4f test moet slagen
+    @Test
+    void shouldCreatePersonWithCar() throws SQLException {
+        Car car = new Car(2, "Ferrari", "Rood", "HH-DF-33");
+        Address address = new Address("Voorterweg", "172", "5611TT", "Eindhoven", "Nederland");
+        Person person = new Person(3, "Carlos", "Sainz", LocalDate.parse("1990-08-29"), Gender.MALE, address);
+        person.setCar(car);
+
+        repository.createPerson(person);
+        Person createdPerson = repository.readPerson(3);
+        assertThat(createdPerson).isNotNull();
+        assertThat(createdPerson.getFirstName()).isEqualTo("Gerda");
+        assertThat(createdPerson.getLastName()).isEqualTo("Janssen");
+        assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1974-08-29"));
+        assertThat(createdPerson.getGender()).isEqualTo(Gender.FEMALE);
+
+        Address createdAddress = person.getAddress();
+        assertThat(createdAddress.getStreetName()).isEqualTo("Dorpstraat");
+        assertThat(createdAddress.getHouseNumber()).isEqualTo("1a");
+        assertThat(createdAddress.getZipCode()).isEqualTo("5504HK");
+        assertThat(createdAddress.getCity()).isEqualTo("Veldhoven");
+        assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
+
+        Car createdCar = createdPerson.getCar();
+        assertThat(createdCar.getId()).isEqualTo(2);
+        assertThat(createdCar.getType()).isEqualTo("Ferrari");
+        assertThat(createdCar.getColor()).isEqualTo("Rood");
+        assertThat(createdCar.getRegistrationPlate()).isEqualTo("HH-DF-33");
+    }
+
+    //TODO 4h test moet slagen
     @Test
     void shouldDelete() throws SQLException {
-        repository.deletePerson(1);
-        Person deletedPerson = repository.readPerson(1);
+        Person person = repository.readPerson(3);
+        repository.deletePerson(person);
+        Person deletedPerson = repository.readPerson(3);
         assertThat(deletedPerson).isNull();
+
+        Car deletedCar = testRepository.getCar(2);
+        assertThat(deletedCar).isNull();
     }
 }
