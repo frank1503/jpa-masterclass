@@ -23,7 +23,6 @@ class PersonRepositoryTest {
         assertThat(person.getGender()).isEqualTo(Gender.MALE);
     }
 
-    //TODO 2c De test moet nu slagen
     @Test
     void shouldCreatePerson() throws SQLException {
         Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
@@ -36,7 +35,6 @@ class PersonRepositoryTest {
         assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
     }
 
-    //TODO 2g De test moet nu slagen
     @Test
     void shouldUpdate() throws SQLException {
         String firstName = "Willy";
@@ -49,7 +47,6 @@ class PersonRepositoryTest {
         assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
     }
 
-    //TODO 2k De test moet nu slagen
     @Test
     void shouldDelete() throws SQLException {
         repository.deletePerson(1);

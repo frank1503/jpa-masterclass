@@ -37,44 +37,47 @@ public class PersonRepository {
         }
     }
 
-    //TODO opdracht 2 in deze opdracht gaan we de andere 3 operaties va de CRUD maken (create, update en delete).
-    // Draai eerst de volgende testen: PersonRepositoryTest.shouldCreatePerson() / shouldUpdate() / shouldDelete. Deze falen
-    // We beginnen met de create
     public void createPerson(Person person) throws SQLException {
-        //TODO 2a maak de query die een persoon kan toevoegen
-        String sql = "";
+        String sql = "insert into person values (?, ?, ?, ?, ?)";//, ?, ?, ?, ?, ?)";
 
         try (
                 Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)
         ) {
-            //TODO 2b zorg ervoor dat de properties van het person object in de database terecht komen
+            preparedStatement.setInt(1, person.getId());
+            preparedStatement.setString(2, person.getFirstName());
+            preparedStatement.setString(3, person.getLastName());
+            preparedStatement.setObject(4, person.getDateOfBirth());
+            preparedStatement.setString(5, person.getGender().name());
+
+            preparedStatement.executeUpdate();
         }
     }
 
-    //TODO 2d we gaan een methode maken die de firstName van een bepaalde Person doet updaten
     public void updateFirstName(String firstName, int id) throws SQLException {
-        //TODO 2e maak de query die de update doet
-        String sql = "";
+        String sql = "update person set first_name = ? where id = ?";
 
         try (
                 Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)
         ) {
-            //TODO 2f zorg dat de update van de firstName wordt uitgevoerd
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setInt(2, id);
+
+            preparedStatement.executeUpdate();
         }
     }
 
-    //TODO 2h tot slot gaan we een methode maken die een persoon verwijderd op basis van de primary key
     public void deletePerson(int primaryKey) throws SQLException {
-        //TODO 2i maak de query die de delete doet
-        String sql = "";
+        String sql = "delete from person where id = ?";
 
         try (
                 Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ) {
-            //TODO 2j zorg dat de person wordt verwijderd
+            preparedStatement.setInt(1, primaryKey);
+
+            preparedStatement.executeUpdate();
         }
     }
 }
