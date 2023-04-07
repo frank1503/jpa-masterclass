@@ -15,7 +15,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class PersonRepositoryTest {
     private final PersonRepository repository = new PersonRepository();
 
-    //TODO 3c test moet nu slagen
     @Test
     void shouldReadPerson() throws SQLException {
         Person person = repository.readPerson(1);
@@ -33,7 +32,6 @@ class PersonRepositoryTest {
         assertThat(address.getCountry()).isEqualTo("Nederland");
     }
 
-    //TODO 3g test moet nu slagen
     @Test
     void shouldCreatePerson() throws SQLException {
         Address address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
@@ -54,7 +52,6 @@ class PersonRepositoryTest {
         assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
     }
 
-    //TODO 3k test moet nu slagen
     @Test
     void shouldUpdateAddress() throws SQLException {
         Address address = new Address("Keizerstraat", "11", "5751MR", "Deurne", "Nederland");

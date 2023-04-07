@@ -7,15 +7,6 @@ import domain.Person;
 import java.sql.*;
 import java.time.LocalDate;
 
-//TODO 3 in deze opdracht gaan we een Address toevoegen aan de Person.
-// Het Address is een apart object maar in de database zitten de address velden in de person tabel (data clump)
-
-//TODO 3a breid eerst de person tabel uit met de volgende velden:
-// - street_name
-// - house_number
-// - zip_code
-// - city
-// - country voer daarna het person.sql script uit (test -> java -> resources)
 public class PersonRepository {
     private static final String URL = "jdbc:postgresql://localhost:5432/jpa";
     private static final String USER_NAME = "postgres";
@@ -40,17 +31,22 @@ public class PersonRepository {
                     LocalDate dateOfBirth = resultSet.getObject(4, LocalDate.class);
                     Gender gender = Gender.valueOf(resultSet.getString(5));
 
-                    //TODO 3b haal uit de resultSet de velden voor Address en maak het Person object
+                    String streetName = resultSet.getString(6);
+                    String houseNumber = resultSet.getString(7);
+                    String zipCode = resultSet.getString(8);
+                    String city = resultSet.getString(9);
+                    String country = resultSet.getString(10);
+
+                    Address address = new Address(streetName, houseNumber, zipCode, city, country);
+                    person = new Person(id, firstName, lastName, dateOfBirth, gender, address);
                 }
             }
             return person;
         }
     }
 
-    //TODO 3d we gaan nu het maken van een persoon aanpassen dat ook het address wordt opgeslagen
     public void createPerson(Person person) throws SQLException {
-        //TODO 3e pas de query aan zodat ook de address velden opgeslagen worden
-        String sql = "insert into person values (?, ?, ?, ?, ?)";
+        String sql = "insert into person values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (
                 Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
@@ -62,7 +58,11 @@ public class PersonRepository {
             preparedStatement.setObject(4, person.getDateOfBirth());
             preparedStatement.setString(5, person.getGender().name());
 
-            //TODO 3f zorg dat de adrress velden worden opgeslagen
+            preparedStatement.setString(6, person.getAddress().getStreetName());
+            preparedStatement.setString(7, person.getAddress().getHouseNumber());
+            preparedStatement.setString(8, person.getAddress().getZipCode());
+            preparedStatement.setString(9, person.getAddress().getCity());
+            preparedStatement.setString(10, person.getAddress().getCountry());
 
             preparedStatement.executeUpdate();
         }
@@ -82,16 +82,29 @@ public class PersonRepository {
         }
     }
 
-    //TODO 3h we gaan een methode maken die een address kan updaten
     public void updateAddress(Address updateAddress, int id) throws SQLException {
-        //TODO 3i maak de query die het address kan updaten
-        String sql = "";
+        String sql = "update person " +
+                "set street_name = ? " +
+                ", house_number = ? " +
+                ", zip_code = ? " +
+                ", city = ? " +
+                ", country = ? " +
+                "where id = ?";
 
         try (
                 Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)
         ) {
-            // TODO 3j zorg dat het address wordt aangepast
+            {
+                preparedStatement.setString(1, updateAddress.getStreetName());
+                preparedStatement.setString(2, updateAddress.getHouseNumber());
+                preparedStatement.setString(3, updateAddress.getZipCode());
+                preparedStatement.setString(4, updateAddress.getCity());
+                preparedStatement.setString(5, updateAddress.getCountry());
+                preparedStatement.setInt(6, id);
+
+                preparedStatement.executeUpdate();
+            }
         }
     }
 
