@@ -122,10 +122,10 @@ class PersonRepositoryTest {
     void shouldDelete() throws SQLException {
         Person person = repository.readPerson(4);
         repository.deletePerson(person);
-        Person deletedPerson = repository.readPerson(4);
+        Person deletedPerson = repository.readPerson(person.getId());
         assertThat(deletedPerson).isNull();
 
-        Car deletedCar = testRepository.getCar(2);
+        Car deletedCar = testRepository.getCar(person.getCar().getId());
         assertThat(deletedCar).isNull();
     }
 }
