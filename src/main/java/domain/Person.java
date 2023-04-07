@@ -8,13 +8,15 @@ public class Person {
     private String lastName;
     private LocalDate dateOfBirth;
     private Gender gender;
+    private Address address;
 
-    public Person(int id, String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
+    public Person(int id, String firstName, String lastName, LocalDate dateOfBirth, Gender gender, Address address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
+        this.address = address;
     }
 
     public int getId() {
@@ -57,6 +59,14 @@ public class Person {
         this.gender = gender;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -65,6 +75,7 @@ public class Person {
                 ", lastName='" + lastName + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", gender=" + gender +
+                ", address=" + address +
                 '}';
     }
 }

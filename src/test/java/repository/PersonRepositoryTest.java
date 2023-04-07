@@ -1,8 +1,10 @@
 package repository;
 
+import domain.Address;
 import domain.Gender;
 import domain.Person;
 import org.assertj.core.internal.cglib.core.Local;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -13,6 +15,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class PersonRepositoryTest {
     private final PersonRepository repository = new PersonRepository();
 
+    //TODO 3c test moet nu slagen
     @Test
     void shouldReadPerson() throws SQLException {
         Person person = repository.readPerson(1);
@@ -21,18 +24,50 @@ class PersonRepositoryTest {
         assertThat(person.getLastName()).isEqualTo("Rinkens");
         assertThat(person.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
         assertThat(person.getGender()).isEqualTo(Gender.MALE);
+
+        Address address = person.getAddress();
+        assertThat(address.getStreetName()).isEqualTo("Dolphijnstraat");
+        assertThat(address.getHouseNumber()).isEqualTo("10");
+        assertThat(address.getZipCode()).isEqualTo("5632CZ");
+        assertThat(address.getCity()).isEqualTo("Eindhoven");
+        assertThat(address.getCountry()).isEqualTo("Nederland");
     }
 
+    //TODO 3g test moet nu slagen
     @Test
     void shouldCreatePerson() throws SQLException {
-        Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+        Address address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
+        Person person = new Person(3, "Gerda", "Janssen", LocalDate.parse("1974-08-29"), Gender.FEMALE, address);
         repository.createPerson(person);
-        Person createdPerson = repository.readPerson(2);
+        Person createdPerson = repository.readPerson(3);
         assertThat(createdPerson).isNotNull();
-        assertThat(createdPerson.getFirstName()).isEqualTo("Rick");
-        assertThat(createdPerson.getLastName()).isEqualTo("Roelofsen");
-        assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
-        assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
+        assertThat(createdPerson.getFirstName()).isEqualTo("Gerda");
+        assertThat(createdPerson.getLastName()).isEqualTo("Janssen");
+        assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1974-08-29"));
+        assertThat(createdPerson.getGender()).isEqualTo(Gender.FEMALE);
+
+        Address createdAddress = person.getAddress();
+        assertThat(createdAddress.getStreetName()).isEqualTo("Dorpstraat");
+        assertThat(createdAddress.getHouseNumber()).isEqualTo("1a");
+        assertThat(createdAddress.getZipCode()).isEqualTo("5504HK");
+        assertThat(createdAddress.getCity()).isEqualTo("Veldhoven");
+        assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
+    }
+
+    //TODO 3k test moet nu slagen
+    @Test
+    void shouldUpdateAddress() throws SQLException {
+        Address address = new Address("Keizerstraat", "11", "5751MR", "Deurne", "Nederland");
+        repository.updateAddress(address, 3);
+        Person person = repository.readPerson(3);
+
+        Address updatedAddress = person.getAddress();
+        assertThat(updatedAddress).isNotNull();
+        assertThat(updatedAddress.getStreetName()).isEqualTo("Keizerstraat");
+        assertThat(updatedAddress.getHouseNumber()).isEqualTo("11");
+        assertThat(updatedAddress.getZipCode()).isEqualTo("5751MR");
+        assertThat(updatedAddress.getCity()).isEqualTo("Deurne");
+        assertThat(updatedAddress.getCountry()).isEqualTo("Nederland");
     }
 
     @Test
