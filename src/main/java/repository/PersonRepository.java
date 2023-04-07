@@ -25,7 +25,7 @@ public class PersonRepository {
     public Person readPerson(int primaryKey) throws SQLException {
         Person person = null;
 
-        //TODO 4b pas de query aan zodat ook de car wordt opgehaald als deze er is
+        //TODO 4b pas de query aan zodat ook de Car wordt opgehaald als deze er is
         String sql = "select * from person p where p.id = ?";
 
         try (
@@ -58,7 +58,7 @@ public class PersonRepository {
         }
     }
 
-    //TODO 4e zorg ervoor dat als een Person wordt opgeslagen ook de bijbehorende auto wordt opgeslagen
+    //TODO 4e zorg ervoor dat als een Person wordt opgeslagen ook de bijbehorende Car wordt opgeslagen
     public void createPerson(Person person) throws SQLException {
         String sql = "insert into person values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -122,7 +122,7 @@ public class PersonRepository {
         }
     }
 
-    //TODO 4g zorg ervoor dat als een person een car heeft, deze ook wordt verwijderd
+    //TODO 4g zorg ervoor dat als een Person een Car heeft, deze ook wordt verwijderd
     public void deletePerson(Person person) throws SQLException {
         String sql = "delete from person where id = ?";
 
