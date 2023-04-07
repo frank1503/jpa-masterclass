@@ -52,6 +52,7 @@ class PersonRepositoryTest {
         assertThat(createdPerson.getGender()).isEqualTo(Gender.FEMALE);
 
         Address createdAddress = person.getAddress();
+        assertThat(createdAddress).isNotNull();
         assertThat(createdAddress.getStreetName()).isEqualTo("Dorpstraat");
         assertThat(createdAddress.getHouseNumber()).isEqualTo("1a");
         assertThat(createdAddress.getZipCode()).isEqualTo("5504HK");
@@ -102,6 +103,7 @@ class PersonRepositoryTest {
         assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
 
         Address createdAddress = person.getAddress();
+        assertThat(createdAddress).isNotNull();
         assertThat(createdAddress.getStreetName()).isEqualTo("Voorterweg");
         assertThat(createdAddress.getHouseNumber()).isEqualTo("172");
         assertThat(createdAddress.getZipCode()).isEqualTo("5611TT");
