@@ -12,6 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class PersonRepositoryTest {
     private final PersonRepository repository = new PersonRepository();
 
+    //TODO 1c draai de untit test. Deze zal nu slagen
     @Test
     void shouldReadPerson() throws SQLException {
         Person person = repository.readPerson(1);
