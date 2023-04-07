@@ -38,6 +38,7 @@ public class PersonRepository {
     }
 
     //TODO opdracht 2 in deze opdracht gaan we de andere 3 operaties va de CRUD maken (create, update en delete).
+    // Draai eerst de volgende testen: PersonRepositoryTest.shouldCreatePerson() / shouldUpdate() / shouldDelete. Deze falen
     // We beginnen met de create
     public void createPerson(Person person) throws SQLException {
         //TODO 2a maak de query die een persoon kan toevoegen
