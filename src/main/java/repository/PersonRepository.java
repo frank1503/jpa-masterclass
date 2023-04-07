@@ -12,7 +12,8 @@ public class PersonRepository {
     private static final String USER_NAME = "postgres";
     private static final String PASSWORD = "mysecretpassword";
 
-    //TODO Opdracht 1: In deze opdracht gaan we een person uit de database lezen
+    //TODO Opdracht 1: In deze opdracht gaan we een person uit de database lezen.
+    // Draai eerst de test PersonRepositoryTest.shouldReadPerson(). Deze faalt nu omdat person null is
     // op basis van de primary key die we binnen krijgen
     public Person readPerson(int primaryKey) throws SQLException {
         Person person = null;
