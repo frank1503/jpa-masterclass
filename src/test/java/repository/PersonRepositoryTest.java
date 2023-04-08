@@ -12,8 +12,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class PersonRepositoryTest {
     private final PersonRepository repository = new PersonRepository();
 
-    //TODO 6d Voer het insert-person.sql script uit
-    // haal de code uit commentaar en run de tet. Deze moet slagen
     @Test
     void shouldReadPerson() {
         Person person = repository.readPerson(1);
@@ -22,13 +20,6 @@ class PersonRepositoryTest {
         assertThat(person.getLastName()).isEqualTo("Rinkens");
         assertThat(person.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
         assertThat(person.getGender()).isEqualTo(Gender.MALE);
-
-//        Address address = person.getAddress();
-//        assertThat(address.getStreetName()).isEqualTo("Dolphijnstraat");
-//        assertThat(address.getHouseNumber()).isEqualTo("10");
-//        assertThat(address.getZipCode()).isEqualTo("5632CZ");
-//        assertThat(address.getCity()).isEqualTo("Eindhoven");
-//        assertThat(address.getCountry()).isEqualTo("Nederland");
     }
 
     //TODO 6c haal de code uit commentaar en run de tet. Deze moet slagen
@@ -55,13 +46,14 @@ class PersonRepositoryTest {
         //assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
     }
 
-    //TODO 6e haal de code uit commentaar en run de tet. Deze moet slagen
+    //TODO 6d haal de code uit commentaar en run de tet. Deze moet slagen
     @Test
     void shouldUpdatePerson() {
         Address address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
         Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         //person.setAddress(address);
         repository.updatePerson(person);
+
         Person updatedPerson = repository.readPerson(2);
         assertThat(updatedPerson).isNotNull();
         assertThat(updatedPerson.getFirstName()).isEqualTo("Rick");
