@@ -2,11 +2,15 @@ package domain;
 
 import java.time.LocalDate;
 
+//TODO 5 Nu gaan we gebruik maken van JPA om de data uit de tabel te lezen. Voer eerst drop.sql script uit
+// TODO 5a zorg dat de juiste annotatie op de Person class komt te staan
 public class Person {
+    //TODO 5b zorg dat de juiste annotatie op de id property komt te staan
     private int id;
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
+    //TODO 5c zorg dat de juiste annotatie op de gender property komt zodat de string-representatie in de database komt
     private Gender gender;
 
     public Person(int id, String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
@@ -17,54 +21,5 @@ public class Person {
         this.gender = gender;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", gender=" + gender +
-                '}';
-    }
+    //TODO 5d maak de benodigde constructor, getters en setters
 }
