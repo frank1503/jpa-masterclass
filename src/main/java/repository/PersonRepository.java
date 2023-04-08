@@ -1,5 +1,6 @@
 package repository;
 
+import domain.Address;
 import domain.Person;
 import jakarta.persistence.*;
 
@@ -44,6 +45,13 @@ public class PersonRepository {
         person.setLastName(updatedPerson.getLastName());
         person.setDateOfBirth(updatedPerson.getDateOfBirth());
         person.setGender(updatedPerson.getGender());
+
+        Address updatedAddress = updatedPerson.getAddress();
+        person.getAddress().setStreetName(updatedAddress.getStreetName());
+        person.getAddress().setHouseNumber(updatedAddress.getHouseNumber());
+        person.getAddress().setZipCode(updatedAddress.getZipCode());
+        person.getAddress().setCity(updatedAddress.getCity());
+        person.getAddress().setCountry(updatedAddress.getCountry());
         tx.commit();
 
         em.close();

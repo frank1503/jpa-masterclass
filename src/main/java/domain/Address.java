@@ -1,6 +1,8 @@
 package domain;
 
-//TODO 6b voeg de juiste annotatie toe
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Address {
     private String streetName;
     private String houseNumber;
@@ -14,6 +16,9 @@ public class Address {
         this.zipCode = zipCode;
         this.city = city;
         this.country = country;
+    }
+
+    public Address() {
     }
 
     public String getStreetName() {
