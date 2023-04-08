@@ -30,7 +30,7 @@
             <!-- DB Password -->
             <property name="javax.persistence.jdbc.password" value="mysecretpassword"/>
             <!-- DB actions-->
-            <property name="javax.persistence.schema-generation.database.action" value="none"/>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>
     </persistence-unit>
 </persistence>

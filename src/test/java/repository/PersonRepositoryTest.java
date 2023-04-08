@@ -11,24 +11,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class PersonRepositoryTest {
     private final PersonRepository repository = new PersonRepository();
 
-    //TODO 5f Voer het insert-person.sql script uit
-    // Haal de code uit commentaar en run dan de test. Deze moet slagen
+    //TODO 5g haal de code uit commentaar en run dan de test. Deze moet slagen
     @Test
-    void shouldReadPerson() {
-        Person person = repository.readPerson(1);
-        assertThat(person).isNotNull();
-//        assertThat(person.getFirstName()).isEqualTo("Frank");
-//        assertThat(person.getLastName()).isEqualTo("Rinkens");
-//        assertThat(person.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
-//        assertThat(person.getGender()).isEqualTo(Gender.MALE);
-
-    }
-
-    //TODO 5e haal de code uit commentaar en run dan de test. Deze moet slagen
-    @Test
-    void shouldCreatePerson() {
+    void shouldCreateAndReadPerson() {
         Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         repository.createPerson(person);
+
         Person createdPerson = repository.readPerson(2);
         assertThat(createdPerson).isNotNull();
 //        assertThat(createdPerson.getFirstName()).isEqualTo("Rick");
@@ -37,8 +25,7 @@ class PersonRepositoryTest {
 //        assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
     }
 
-    //TODO 5h zet in de persistence.xml de database action op none
-    // Haal de code uit commentaar en run dan de test. Deze moet slagen
+    //TODO 5i Haal de code uit commentaar en run dan de test. Deze moet slagen
     @Test
     void shouldUpdatePerson() {
         Person person = new Person(2, "Willy", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
@@ -51,7 +38,7 @@ class PersonRepositoryTest {
 //        assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
     }
 
-    //TODO 5i Run dan de test, deze moet slagen
+    //TODO 5k Run dan de test, deze moet slagen
     @Test
     void shouldDeletePerson() {
         repository.deletePerson(2);
