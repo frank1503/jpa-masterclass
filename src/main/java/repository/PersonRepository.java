@@ -39,11 +39,8 @@ public class PersonRepository {
         EntityTransaction tx = em.getTransaction();
 
         tx.begin();
-        Person person = em.find(Person.class, updatedPerson.getId());
-        person.setFirstName(updatedPerson.getFirstName());
-        person.setLastName(updatedPerson.getLastName());
-        person.setDateOfBirth(updatedPerson.getDateOfBirth());
-        person.setGender(updatedPerson.getGender());
+        Person person = em.merge(updatedPerson);
+        em.persist(person);
         tx.commit();
 
         em.close();
