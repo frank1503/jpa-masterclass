@@ -1,8 +1,10 @@
 package repository;
 
-import domain.Address;
 import domain.Person;
-import jakarta.persistence.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
 
 public class PersonRepository {
 
