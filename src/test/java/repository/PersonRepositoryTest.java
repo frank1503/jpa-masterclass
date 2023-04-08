@@ -12,18 +12,7 @@ class PersonRepositoryTest {
     private final PersonRepository repository = new PersonRepository();
 
     @Test
-    void shouldReadPerson() {
-        Person person = repository.readPerson(1);
-        assertThat(person).isNotNull();
-        assertThat(person.getFirstName()).isEqualTo("Frank");
-        assertThat(person.getLastName()).isEqualTo("Rinkens");
-        assertThat(person.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
-        assertThat(person.getGender()).isEqualTo(Gender.MALE);
-
-    }
-
-    @Test
-    void shouldCreatePerson() {
+    void shouldCreateAndReadPerson() {
         Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         repository.createPerson(person);
         Person createdPerson = repository.readPerson(2);
