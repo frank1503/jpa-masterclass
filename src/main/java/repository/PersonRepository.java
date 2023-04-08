@@ -11,9 +11,9 @@ import java.time.LocalDate;
 // Het Address is een apart object maar in de database zitten de address velden in de person tabel (data clump)
 
 //TODO 3a breid eerst de person tabel uit met de volgende velden:
-// - street_name
-// - house_number
-// - zip_code
+// - streetname
+// - housenumber
+// - zipcode
 // - city
 // - country voer daarna het person.sql script uit (test -> java -> resources)
 public class PersonRepository {
