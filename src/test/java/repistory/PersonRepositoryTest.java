@@ -35,9 +35,9 @@ class PersonRepositoryTest {
     }
 
     @Test
-    void shouldUpdate() {
+    void shouldUpdatePerson() {
         Person person = new Person(2, "Willy", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
-        repository.updateFirstName(person);
+        repository.updatePerson(person);
         Person updatedPerson = repository.readPerson(2);
         assertThat(updatedPerson).isNotNull();
         assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
