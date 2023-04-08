@@ -55,20 +55,32 @@ class PersonRepositoryTest {
         //assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
     }
 
+    //TODO 6e haal de code uit commentaar en run de tet. Deze moet slagen
     @Test
-    void shouldUpdate() {
-        String firstName = "Willy";
-        repository.updateFirstName(firstName, 2);
+    void shouldUpdatePerson() {
+        Address address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
+        Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+        //person.setAddress(address);
+        repository.updatePerson(person);
         Person updatedPerson = repository.readPerson(2);
         assertThat(updatedPerson).isNotNull();
-        assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
+        assertThat(updatedPerson.getFirstName()).isEqualTo("Rick");
         assertThat(updatedPerson.getLastName()).isEqualTo("Roelofsen");
         assertThat(updatedPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
         assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
+
+        //Address createdAddress = updatedPerson.getAddress();
+        //assertThat(createdAddress).isNotNull();
+        //assertThat(createdAddress.getStreetName()).isEqualTo("Dorpstraat");
+        //assertThat(createdAddress.getHouseNumber()).isEqualTo("1a");
+        //assertThat(createdAddress.getZipCode()).isEqualTo("5504HK");
+        //assertThat(createdAddress.getCity()).isEqualTo("Veldhoven");
+        //assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
     }
 
+    //TODO 6f Run de tet. Deze moet slagen
     @Test
-    void shouldDelete() {
+    void shouldDeletePerson() {
         repository.deletePerson(2);
         Person deletedPerson = repository.readPerson(2);
         assertThat(deletedPerson).isNull();

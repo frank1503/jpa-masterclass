@@ -33,14 +33,17 @@ public class PersonRepository {
         emf.close();
     }
 
-    public void updateFirstName(String firstName, int id) {
+    public void updatePerson(Person updatedPerson) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass-none");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         tx.begin();
-        Person person = em.find(Person.class, id);
-        person.setFirstName("Willy");
+        Person person = em.find(Person.class, updatedPerson.getId());
+        person.setFirstName(updatedPerson.getFirstName());
+        person.setLastName(updatedPerson.getLastName());
+        person.setDateOfBirth(updatedPerson.getDateOfBirth());
+        person.setGender(updatedPerson.getGender());
         tx.commit();
 
         em.close();
