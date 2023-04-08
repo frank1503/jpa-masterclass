@@ -40,7 +40,7 @@ public class PersonRepository {
 
         tx.begin();
         Person person = em.find(Person.class, id);
-        person.setFirstName("Willy");
+        person.setFirstName(firstName);
         tx.commit();
 
         em.close();
