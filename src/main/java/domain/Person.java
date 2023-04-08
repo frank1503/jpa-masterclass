@@ -16,6 +16,7 @@ public class Person {
     private LocalDate dateOfBirth;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    //TODO 6a Voeg de property address met de juiste annotatie
 
     public Person(int id, String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
         this.id = id;
