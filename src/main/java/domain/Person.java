@@ -25,7 +25,6 @@ public class Person {
         this.gender = gender;
     }
 
-    //TODO 5d maak de benodigde constructor, getters en setters
     public Person() {}
 
     public int getId() {
