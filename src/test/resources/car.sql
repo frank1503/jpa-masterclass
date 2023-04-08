@@ -1,5 +1,5 @@
 insert into jpa.public.car
-(id, type, color, registration_plate)
+(id, type, color, registrationplate)
 values
 (1, 'Seat', 'Blauw', 'P-468-LJ');
 
