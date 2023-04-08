@@ -1,5 +1,6 @@
 package repository;
 
+import domain.Address;
 import domain.Person;
 import jakarta.persistence.*;
 
@@ -44,6 +45,9 @@ public class PersonRepository {
         person.setLastName(updatedPerson.getLastName());
         person.setDateOfBirth(updatedPerson.getDateOfBirth());
         person.setGender(updatedPerson.getGender());
+
+        //TODO 6d zorg ervoor dat de address properties uit updatedPerson geset worden op de hierboven opgehaald person
+
         tx.commit();
 
         em.close();

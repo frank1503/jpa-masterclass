@@ -12,19 +12,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class PersonRepositoryTest {
     private final PersonRepository repository = new PersonRepository();
 
-    @Test
-    void shouldReadPerson() {
-        Person person = repository.readPerson(1);
-        assertThat(person).isNotNull();
-        assertThat(person.getFirstName()).isEqualTo("Frank");
-        assertThat(person.getLastName()).isEqualTo("Rinkens");
-        assertThat(person.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
-        assertThat(person.getGender()).isEqualTo(Gender.MALE);
-    }
-
     //TODO 6c haal de code uit commentaar en run de tet. Deze moet slagen
     @Test
-    void shouldCreatePerson() {
+    void shouldCreateAndReadPerson() {
         Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
         Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         //person.setAddress(address);
@@ -46,17 +36,17 @@ class PersonRepositoryTest {
         //assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
     }
 
-    //TODO 6d haal de code uit commentaar en run de tet. Deze moet slagen
+    //TODO 6e haal de code uit commentaar en run de tet. Deze moet slagen
     @Test
     void shouldUpdatePerson() {
         Address address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
-        Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+        Person person = new Person(2, "Willy", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         //person.setAddress(address);
         repository.updatePerson(person);
 
         Person updatedPerson = repository.readPerson(2);
         assertThat(updatedPerson).isNotNull();
-        assertThat(updatedPerson.getFirstName()).isEqualTo("Rick");
+        assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
         assertThat(updatedPerson.getLastName()).isEqualTo("Roelofsen");
         assertThat(updatedPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
         assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
