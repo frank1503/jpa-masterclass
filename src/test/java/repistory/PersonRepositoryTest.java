@@ -41,8 +41,8 @@ class PersonRepositoryTest {
     // Haal de code uit commentaar en run dan de test. Deze moet slagen
     @Test
     void shouldUpdate() {
-        String firstName = "Willy";
-        repository.updateFirstName(firstName, 2);
+        Person person = new Person(2, "Willy", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+        repository.updateFirstName(person);
         Person updatedPerson = repository.readPerson(2);
         assertThat(updatedPerson).isNotNull();
 //        assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
