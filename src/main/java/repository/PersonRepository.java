@@ -29,7 +29,7 @@ public class PersonRepository {
 
         tx.begin();
         //TODO 5f haal de code uit commentaar
-        // De persist methode slaat de Person voor je op.
+        // De persist methode slaat de Person
         //em.persist(person);
         tx.commit();
 
@@ -44,9 +44,9 @@ public class PersonRepository {
 
         tx.begin();
         //TODO 5h haal onderstaande regel uit commentaar
-        // zorg dat op de opgehaald person de properties van de updatedPerson worden geset.
-        //Person person = em.find(Person.class, updatedPerson.getId());
-
+        // De merge en persis methodes samen zorgen dat de Person wordt geupdate
+        //Person person = em.merge(updatedPerson);
+        //em.persist(person);
         tx.commit();
 
         em.close();
@@ -59,10 +59,10 @@ public class PersonRepository {
         EntityTransaction tx = em.getTransaction();
 
         //TODO 5j haal onderstaande regel uit commentaar
-        // De remove methode verwijdert de person voor je
+        // De remove methode verwijdert de Person
         tx.begin();
-//        Person person = em.find(Person.class, primaryKey);
-//        em.remove(person);
+        //Person person = em.find(Person.class, primaryKey);
+        //em.remove(person);
         tx.commit();
 
         em.close();
