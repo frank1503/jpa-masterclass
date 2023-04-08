@@ -36,7 +36,7 @@ class PersonRepositoryTest {
         //assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
     }
 
-    //TODO 6e haal de code uit commentaar en run de tet. Deze moet slagen
+    //TODO 6d haal de code uit commentaar en run de tet. Deze moet slagen
     @Test
     void shouldUpdatePerson() {
         Address address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
@@ -60,7 +60,7 @@ class PersonRepositoryTest {
         //assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
     }
 
-    //TODO 6f Run de tet. Deze moet slagen
+    //TODO 6e Run de tet. Deze moet slagen
     @Test
     void shouldDeletePerson() {
         repository.deletePerson(2);

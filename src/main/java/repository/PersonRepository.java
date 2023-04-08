@@ -1,8 +1,10 @@
 package repository;
 
-import domain.Address;
 import domain.Person;
-import jakarta.persistence.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
 
 public class PersonRepository {
 
@@ -40,14 +42,8 @@ public class PersonRepository {
         EntityTransaction tx = em.getTransaction();
 
         tx.begin();
-        Person person = em.find(Person.class, updatedPerson.getId());
-        person.setFirstName(updatedPerson.getFirstName());
-        person.setLastName(updatedPerson.getLastName());
-        person.setDateOfBirth(updatedPerson.getDateOfBirth());
-        person.setGender(updatedPerson.getGender());
-
-        //TODO 6d zorg ervoor dat de address properties uit updatedPerson geset worden op de hierboven opgehaald person
-
+        Person person = em.merge(updatedPerson);
+        em.persist(person);
         tx.commit();
 
         em.close();
