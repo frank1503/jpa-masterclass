@@ -1,6 +1,6 @@
 package domain;
 
-//TODO 6b voeg de juiste annotatie toe
+//TODO 6b voeg de juiste annotatie toe en de non-args constructor
 public class Address {
     private String streetName;
     private String houseNumber;
