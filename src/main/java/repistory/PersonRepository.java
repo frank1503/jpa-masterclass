@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class PersonRepository {
 
     public Person readPerson(int primaryKey) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass-none");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -21,7 +21,7 @@ public class PersonRepository {
     }
 
     public void createPerson(Person person) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass-create");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -34,7 +34,7 @@ public class PersonRepository {
     }
 
     public void updateFirstName(String firstName, int id) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass-none");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -49,7 +49,7 @@ public class PersonRepository {
     }
 
     public void deletePerson(int primaryKey) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass-none");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 

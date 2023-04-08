@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class PersonRepositoryTest {
     private final PersonRepository repository = new PersonRepository();
 
-    //TODO 5e zet in de persistence.xml de database action op none en voert het insert-person.sql script uit
+    //TODO 5f Voer het insert-person.sql script uit
     // Haal de code uit commentaar en run dan de test. Deze moet slagen
     @Test
     void shouldReadPerson() {
@@ -24,8 +24,7 @@ class PersonRepositoryTest {
 
     }
 
-    //TODO 5f zet in de persistence.xml de database action op drop-and-create
-    // Haal de code uit commentaar en run dan de test. Deze moet slagen
+    //TODO 5e haal de code uit commentaar en run dan de test. Deze moet slagen
     @Test
     void shouldCreatePerson() {
         Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
