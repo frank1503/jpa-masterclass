@@ -42,13 +42,11 @@ public class PersonRepository {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
-        //TODO 5h haal onderstaande regel uit commentaar
         tx.begin();
+        //TODO 5h haal onderstaande regel uit commentaar
+        // zorg dat op de opgehaald person de properties van de updatedPerson worden geset.
         //Person person = em.find(Person.class, updatedPerson.getId());
-        //person.setFirstName(updatedPerson.getFirstName());
-        //person.setLastName(updatedPerson.getLastName());
-        //person.setDateOfBirth(updatedPerson.getDateOfBirth());
-        //person.setGender(updatedPerson.getGender());
+
         tx.commit();
 
         em.close();
