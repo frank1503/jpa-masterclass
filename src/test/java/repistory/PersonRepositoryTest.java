@@ -40,9 +40,9 @@ class PersonRepositoryTest {
     //TODO 5h zet in de persistence.xml de database action op none
     // Haal de code uit commentaar en run dan de test. Deze moet slagen
     @Test
-    void shouldUpdate() {
+    void shouldUpdatePerson() {
         Person person = new Person(2, "Willy", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
-        repository.updateFirstName(person);
+        repository.updatePerson(person);
         Person updatedPerson = repository.readPerson(2);
         assertThat(updatedPerson).isNotNull();
 //        assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
@@ -53,7 +53,7 @@ class PersonRepositoryTest {
 
     //TODO 5i Run dan de test, deze moet slagen
     @Test
-    void shouldDelete() {
+    void shouldDeletePerson() {
         repository.deletePerson(2);
         Person deletedPerson = repository.readPerson(2);
         assertThat(deletedPerson).isNull();

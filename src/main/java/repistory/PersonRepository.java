@@ -33,7 +33,7 @@ public class PersonRepository {
         emf.close();
     }
 
-    public void updateFirstName(Person updatedPerson) {
+    public void updatePerson(Person updatedPerson) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass-none");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
