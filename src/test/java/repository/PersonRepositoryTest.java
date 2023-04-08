@@ -1,4 +1,4 @@
-package repistory;
+package repository;
 
 import domain.Gender;
 import domain.Person;
