@@ -11,47 +11,41 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class PersonRepositoryTest {
     private final PersonRepository repository = new PersonRepository();
 
-    //TODO 5f Voer het insert-person.sql script uit
-    // Haal de code uit commentaar en run dan de test. Deze moet slagen
     @Test
     void shouldReadPerson() {
         Person person = repository.readPerson(1);
         assertThat(person).isNotNull();
-//        assertThat(person.getFirstName()).isEqualTo("Frank");
-//        assertThat(person.getLastName()).isEqualTo("Rinkens");
-//        assertThat(person.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
-//        assertThat(person.getGender()).isEqualTo(Gender.MALE);
+        assertThat(person.getFirstName()).isEqualTo("Frank");
+        assertThat(person.getLastName()).isEqualTo("Rinkens");
+        assertThat(person.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
+        assertThat(person.getGender()).isEqualTo(Gender.MALE);
 
     }
 
-    //TODO 5e haal de code uit commentaar en run dan de test. Deze moet slagen
     @Test
     void shouldCreatePerson() {
         Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         repository.createPerson(person);
         Person createdPerson = repository.readPerson(2);
         assertThat(createdPerson).isNotNull();
-//        assertThat(createdPerson.getFirstName()).isEqualTo("Rick");
-//        assertThat(createdPerson.getLastName()).isEqualTo("Roelofsen");
-//        assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
-//        assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
+        assertThat(createdPerson.getFirstName()).isEqualTo("Rick");
+        assertThat(createdPerson.getLastName()).isEqualTo("Roelofsen");
+        assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
+        assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
     }
 
-    //TODO 5h zet in de persistence.xml de database action op none
-    // Haal de code uit commentaar en run dan de test. Deze moet slagen
     @Test
     void shouldUpdate() {
         String firstName = "Willy";
         repository.updateFirstName(firstName, 2);
         Person updatedPerson = repository.readPerson(2);
         assertThat(updatedPerson).isNotNull();
-//        assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
-//        assertThat(updatedPerson.getLastName()).isEqualTo("Roelofsen");
-//        assertThat(updatedPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
-//        assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
+        assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
+        assertThat(updatedPerson.getLastName()).isEqualTo("Roelofsen");
+        assertThat(updatedPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
+        assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
     }
 
-    //TODO 5i Run dan de test, deze moet slagen
     @Test
     void shouldDelete() {
         repository.deletePerson(2);

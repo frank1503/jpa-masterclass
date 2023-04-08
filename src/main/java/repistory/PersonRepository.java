@@ -40,8 +40,7 @@ public class PersonRepository {
 
         tx.begin();
         Person person = em.find(Person.class, id);
-        //TODO 5g haal onderstaande regel uit commentaar
-        //person.setFirstName("Willy");
+        person.setFirstName("Willy");
         tx.commit();
 
         em.close();
