@@ -66,16 +66,4 @@ public class Person {
     public void setAddress(Address address) {
         this.address = address;
     }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", gender=" + gender +
-                ", address=" + address +
-                '}';
-    }
 }
