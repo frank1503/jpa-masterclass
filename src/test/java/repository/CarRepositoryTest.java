@@ -9,7 +9,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class CarRepositoryTest {
     private final CarRepository carRepository = new CarRepository();
 
-    //TODO 7c draai de test, deze moet slagen
     @Test
     void shouldCreateAndReadCar() {
         Car car = new Car(123, "Seat", "Blue", "P-468-LJ");
