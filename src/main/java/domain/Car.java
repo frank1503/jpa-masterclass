@@ -7,7 +7,7 @@ import jakarta.persistence.IdClass;
 @Entity
 @IdClass(CarPK.class)
 public class Car {
-    //TODO 7b zorg dat serialNumber en type de Id vormen voor Car. Maak hiervoor een aparte primary key class
+
     @Id
     private int serialNumber;
     @Id
