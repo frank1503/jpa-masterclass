@@ -7,8 +7,6 @@ import java.time.LocalDate;
 @Entity
 public class Person {
     //TODO 7a zorg dat id automatisch gegenereerd wordt met de IDENTITY strategie
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;

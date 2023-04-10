@@ -1,16 +1,12 @@
 package domain;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 
+//TODO 7b zorg dat serialNumber en type de Id vormen voor Car. Maak hiervoor een aparte primary key class
 @Entity
-@IdClass(CarPK.class)
 public class Car {
-    //TODO 7b zorg dat serialNumber en type de Id vormen voor Car. Maak hiervoor een aparte primary key class
-    @Id
+
     private int serialNumber;
-    @Id
     private String type;
     private String color;
     private String registrationPlate;
