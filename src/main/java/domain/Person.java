@@ -6,7 +6,9 @@ import java.time.LocalDate;
 
 @Entity
 public class Person {
+    //TODO 7a zorg dat id automatisch gegenereerd wordt met de IDENTITY strategie
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
@@ -16,8 +18,7 @@ public class Person {
     @Embedded
     private Address address;
 
-    public Person(int id, String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
-        this.id = id;
+    public Person(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;

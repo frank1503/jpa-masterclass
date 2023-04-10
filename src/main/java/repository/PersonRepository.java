@@ -23,8 +23,8 @@ public class PersonRepository {
         return person;
     }
 
-    public void createPerson(Person person) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass-create");
+    public int createPerson(Person person) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass-none");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -34,6 +34,8 @@ public class PersonRepository {
 
         em.close();
         emf.close();
+
+        return person.getId();
     }
 
     public void updatePerson(Person updatedPerson) {
