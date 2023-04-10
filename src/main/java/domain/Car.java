@@ -44,14 +44,4 @@ public class Car {
     public void setId(int id) {
         this.id = id;
     }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "type='" + type + '\'' +
-                ", colors='" + color + '\'' +
-                ", registrationPlate='" + registrationPlate + '\'' +
-                ", volgNumber=" + id +
-                '}';
-    }
 }
