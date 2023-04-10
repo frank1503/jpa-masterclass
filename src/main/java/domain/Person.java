@@ -75,17 +75,4 @@ public class Person {
     public void setCar(Car car) {
         this.car = car;
     }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", gender=" + gender +
-                ", address=" + address +
-                ", car=" + car +
-                '}';
-    }
 }
