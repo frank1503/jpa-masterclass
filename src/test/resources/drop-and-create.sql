@@ -18,9 +18,9 @@ create table person
 
 create table car
 (
-    serialnumber      integer      not null,
-    type              varchar(255) not null,
+    sequenceNumber   integer      not null,
+    registrationplate varchar(255) not null,
+    brand              varchar(255),
     color             varchar(255),
-    registrationplate varchar(255),
-    primary key (serialnumber, type)
+    primary key (sequenceNumber, registrationplate)
 );
