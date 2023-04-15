@@ -2,6 +2,7 @@ package repository;
 
 import domain.Car;
 import domain.CarPK;
+import domain.Person;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -37,5 +38,19 @@ public class CarRepository {
         emf.close();
 
         return new CarPK(car.getSequenceNumber(), car.getRegistrationPlate());
+    }
+
+    public void deleteCar(CarPK carPK) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass-none");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        tx.begin();
+        Car car = em.find(Car.class, carPK);
+        em.remove(car);
+        tx.commit();
+
+        em.close();
+        emf.close();
     }
 }

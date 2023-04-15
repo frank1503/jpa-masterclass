@@ -10,7 +10,7 @@ public class CarRepositoryTest {
     private final CarRepository carRepository = new CarRepository();
 
     @Test
-    void shouldCreateAndReadCar() {
+    void shouldCreateReadAndDeleteCar() {
         Car car = new Car(123, "Seat", "Blue", "P-468-LJ");
         CarPK carPK = carRepository.createCar(car);
 
@@ -19,5 +19,10 @@ public class CarRepositoryTest {
         assertThat(createdCar.getBrand()).isEqualTo("Seat");
         assertThat(createdCar.getColor()).isEqualTo("Blue");
         assertThat(createdCar.getRegistrationPlate()).isEqualTo("P-468-LJ");
+
+        carRepository.deleteCar(carPK);
+
+        Car deletedCar = carRepository.readCar(carPK);
+        assertThat(deletedCar).isNull();
     }
 }

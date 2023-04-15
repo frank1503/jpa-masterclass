@@ -3,6 +3,7 @@ package domain;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 public class Person {
@@ -17,12 +18,19 @@ public class Person {
     private Gender gender;
     @Embedded
     private Address address;
+    @Transient
+    private int age;
 
     public Person(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
+    }
+
+    @PostLoad
+    public void determineAge() {
+        this.age = Period.between(this.dateOfBirth, LocalDate.now()).getYears();
     }
 
     public Person() {}
@@ -73,5 +81,9 @@ public class Person {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public int getAge() {
+        return age;
     }
 }

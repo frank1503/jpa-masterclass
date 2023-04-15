@@ -11,13 +11,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class PersonRepositoryTest {
     private final PersonRepository repository = new PersonRepository();
+    private static int id;
 
     @Test
     void shouldCreateAndReadPerson() {
         Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
         Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         person.setAddress(address);
-        int id = repository.createPerson(person);
+        id = repository.createPerson(person);
 
         Person createdPerson = repository.readPerson(id);
         assertThat(createdPerson).isNotNull();
@@ -25,6 +26,7 @@ class PersonRepositoryTest {
         assertThat(createdPerson.getLastName()).isEqualTo("Roelofsen");
         assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
         assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
+        assertThat(createdPerson.getAge()).isEqualTo(37);
 
         Address createdAddress = person.getAddress();
         assertThat(createdAddress).isNotNull();
@@ -40,10 +42,10 @@ class PersonRepositoryTest {
         Address address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
         Person person = new Person("Willy", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         person.setAddress(address);
-        person.setId(1);
+        person.setId(id);
         repository.updatePerson(person);
 
-        Person updatedPerson = repository.readPerson(1);
+        Person updatedPerson = repository.readPerson(id);
         assertThat(updatedPerson).isNotNull();
         assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
         assertThat(updatedPerson.getLastName()).isEqualTo("Roelofsen");
@@ -61,8 +63,8 @@ class PersonRepositoryTest {
 
     @Test
     void shouldDeletePerson() {
-        repository.deletePerson(1);
-        Person deletedPerson = repository.readPerson(1);
+        repository.deletePerson(id);
+        Person deletedPerson = repository.readPerson(id);
         assertThat(deletedPerson).isNull();
     }
 }
