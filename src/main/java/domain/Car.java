@@ -2,39 +2,39 @@ package domain;
 
 import jakarta.persistence.Entity;
 
-//TODO 7b zorg dat serialNumber en type de Id vormen voor Car. Maak hiervoor een aparte primary key class
+//TODO 7b zorg dat registrationPlate en sequenceNumber de primary key vormen voor Car.
 @Entity
 public class Car {
 
-    private int serialNumber;
-    private String type;
-    private String color;
     private String registrationPlate;
+    private int sequenceNumber;
+    private String brand;
+    private String color;
 
     public Car() {
     }
 
-    public Car(int serialNumber, String type, String color, String registrationPlate) {
-        this.serialNumber = serialNumber;
-        this.type = type;
+    public Car(int sequenceNumber, String brand, String color, String registrationPlate) {
+        this.sequenceNumber = sequenceNumber;
+        this.brand = brand;
         this.color = color;
         this.registrationPlate = registrationPlate;
     }
 
-    public int getSerialNumber() {
-        return serialNumber;
+    public int getSequenceNumber() {
+        return sequenceNumber;
     }
 
-    public void setSerialNumber(int serialNumber) {
-        this.serialNumber = serialNumber;
+    public void setSequenceNumber(int serialNumber) {
+        this.sequenceNumber = serialNumber;
     }
 
-    public String getType() {
-        return type;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setBrand(String type) {
+        this.brand = type;
     }
 
     public String getColor() {

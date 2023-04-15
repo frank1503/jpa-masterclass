@@ -7,7 +7,7 @@ import java.time.LocalDate;
 //TODO 7 draai eerst het drop-and-create script zodat je met een schone database kan beginnen
 @Entity
 public class Person {
-    //TODO 7a zorg dat id automatisch gegenereerd wordt met de IDENTITY strategie
+    //TODO 7a zorg dat primary key automatisch gegenereerd wordt met de IDENTITY strategie
     private int id;
     private String firstName;
     private String lastName;

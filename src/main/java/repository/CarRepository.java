@@ -36,6 +36,6 @@ public class CarRepository {
         em.close();
         emf.close();
 
-        return new CarPK(car.getSerialNumber(), car.getType());
+        return new CarPK(car.getSequenceNumber(), car.getBrand());
     }
 }

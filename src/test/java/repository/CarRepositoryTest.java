@@ -16,8 +16,8 @@ public class CarRepositoryTest {
         CarPK carPK = carRepository.createCar(car);
 
         Car createdCar = carRepository.readCar(carPK);
-        assertThat(createdCar.getSerialNumber()).isEqualTo(123);
-        assertThat(createdCar.getType()).isEqualTo("Seat");
+        assertThat(createdCar.getSequenceNumber()).isEqualTo(123);
+        assertThat(createdCar.getBrand()).isEqualTo("Seat");
         assertThat(createdCar.getColor()).isEqualTo("Blue");
         assertThat(createdCar.getRegistrationPlate()).isEqualTo("P-468-LJ");
     }
