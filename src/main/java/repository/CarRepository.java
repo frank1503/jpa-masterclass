@@ -38,4 +38,18 @@ public class CarRepository {
 
         return new CarPK(car.getSequenceNumber(), car.getBrand());
     }
+
+    public void deleteCar(CarPK carPK) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass-none");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        tx.begin();
+        Car car = em.find(Car.class, carPK);
+        em.remove(car);
+        tx.commit();
+
+        em.close();
+        emf.close();
+    }
 }

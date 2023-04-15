@@ -9,7 +9,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class CarRepositoryTest {
     private final CarRepository carRepository = new CarRepository();
 
-    //TODO 7c draai de test, deze moet slagen
+    //TODO 7e draai de test, deze moet slagen. Controleer in de log dat de AUDIT logging voorbij is gekomen
     @Test
     void shouldCreateAndReadCar() {
         Car car = new Car(123, "Seat", "Blue", "P-468-LJ");
@@ -20,5 +20,10 @@ public class CarRepositoryTest {
         assertThat(createdCar.getBrand()).isEqualTo("Seat");
         assertThat(createdCar.getColor()).isEqualTo("Blue");
         assertThat(createdCar.getRegistrationPlate()).isEqualTo("P-468-LJ");
+
+        carRepository.deleteCar(carPK);
+
+        Car deletedCar = carRepository.readCar(carPK);
+        assertThat(deletedCar).isNull();
     }
 }
