@@ -17,6 +17,7 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+//TODO 9b draai de unit tests. Deze moeten slagen
 @ExtendWith(SpringExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @SpringBootTest(classes = JpaApplication.class)
@@ -36,6 +37,7 @@ class PersonRepositoryTest {
         person.setAddress(address);
         int id = personRepository.createPerson(person);
         entityManager.flush();
+        //TODO 9e zet onderstaande regel in commentaar. Waarom faalt de test nu?
         entityManager.clear();
 
         Person createdPerson = personRepository.readPerson(id);

@@ -7,6 +7,7 @@ import jpa.domain.CarPK;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+//TODO 9c implementeer de repository
 @Repository
 @Transactional
 public class CarRepositoryImpl implements CarRepository {
@@ -16,19 +17,17 @@ public class CarRepositoryImpl implements CarRepository {
 
     @Override
     public Car readCar(CarPK carPK) {
-        return entityManager.find(Car.class, carPK);
+        return null;
     }
 
     @Override
     public CarPK createCar(Car car) {
-        entityManager.persist(car);
 
         return new CarPK(car.getSequenceNumber(), car.getRegistrationPlate());
     }
 
     @Override
     public void deleteCar(CarPK carPK) {
-        Car car = entityManager.find(Car.class, carPK);
-        entityManager.remove(car);
+
     }
 }
