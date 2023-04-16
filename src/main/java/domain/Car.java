@@ -5,6 +5,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 
+@EntityListeners(AuditTrailerListener.class)
 @Entity
 @IdClass(CarPK.class)
 public class Car {
