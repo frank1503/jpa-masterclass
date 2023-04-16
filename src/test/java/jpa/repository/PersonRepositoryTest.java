@@ -1,26 +1,44 @@
-package repository;
+package jpa.repository;
 
-import domain.Address;
-import domain.Gender;
-import domain.Person;
+import jakarta.persistence.EntityManager;
+import jpa.JpaApplication;
+import jpa.domain.Address;
+import jpa.domain.Gender;
+import jpa.domain.Person;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@ExtendWith(SpringExtension.class)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@SpringBootTest(classes = JpaApplication.class)
+@Transactional
 class PersonRepositoryTest {
-    private final PersonRepository repository = new PersonRepository();
-    private static int id;
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Test
     void shouldCreateAndReadPerson() {
         Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
         Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         person.setAddress(address);
-        id = repository.createPerson(person);
+        int id = personRepository.createPerson(person);
+        entityManager.flush();
+        entityManager.clear();
 
-        Person createdPerson = repository.readPerson(id);
+        Person createdPerson = personRepository.readPerson(id);
         assertThat(createdPerson).isNotNull();
         assertThat(createdPerson.getFirstName()).isEqualTo("Rick");
         assertThat(createdPerson.getLastName()).isEqualTo("Roelofsen");
@@ -39,18 +57,28 @@ class PersonRepositoryTest {
 
     @Test
     void shouldUpdatePerson() {
-        Address address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
-        Person person = new Person("Willy", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+        Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
+        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+        person.setAddress(address);
+        int id = personRepository.createPerson(person);
+        entityManager.flush();
+        entityManager.clear();
+
+        address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
+        person.setFirstName("Willy");
         person.setAddress(address);
         person.setId(id);
-        repository.updatePerson(person);
+        personRepository.updatePerson(person);
+        entityManager.flush();
+        entityManager.clear();
 
-        Person updatedPerson = repository.readPerson(id);
+        Person updatedPerson = personRepository.readPerson(id);
         assertThat(updatedPerson).isNotNull();
         assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
         assertThat(updatedPerson.getLastName()).isEqualTo("Roelofsen");
         assertThat(updatedPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
         assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
+        assertThat(updatedPerson.getAge()).isEqualTo(37);
 
         Address createdAddress = updatedPerson.getAddress();
         assertThat(createdAddress).isNotNull();
@@ -63,8 +91,18 @@ class PersonRepositoryTest {
 
     @Test
     void shouldDeletePerson() {
-        repository.deletePerson(id);
-        Person deletedPerson = repository.readPerson(id);
+        Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
+        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+        person.setAddress(address);
+        int id = personRepository.createPerson(person);
+        entityManager.flush();
+        entityManager.clear();
+
+        personRepository.deletePerson(id);
+        entityManager.flush();
+        entityManager.clear();
+
+        Person deletedPerson = personRepository.readPerson(id);
         assertThat(deletedPerson).isNull();
     }
 }

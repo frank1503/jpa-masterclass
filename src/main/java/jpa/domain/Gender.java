@@ -1,4 +1,4 @@
-package domain;
+package jpa.domain;
 
 public enum Gender {
     MALE,

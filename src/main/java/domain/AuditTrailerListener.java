@@ -1,6 +1,7 @@
 package domain;
 
 import jakarta.persistence.*;
+import jpa.domain.Car;
 
 import java.util.logging.Logger;
 

@@ -1,4 +1,4 @@
-package domain;
+package jpa.domain;
 
 import jakarta.persistence.Embeddable;
 
