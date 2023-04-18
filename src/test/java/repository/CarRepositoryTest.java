@@ -4,7 +4,8 @@ import domain.Car;
 import domain.CarPK;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class CarRepositoryTest {
     private final CarRepository carRepository = new CarRepository();
