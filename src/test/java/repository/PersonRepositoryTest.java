@@ -2,13 +2,12 @@ package repository;
 
 import domain.Gender;
 import domain.Person;
-import org.assertj.core.internal.cglib.core.Local;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class PersonRepositoryTest {
     private final PersonRepository repository = new PersonRepository();
