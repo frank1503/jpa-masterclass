@@ -6,6 +6,7 @@ import domain.Person;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,8 +15,9 @@ class PersonRepositoryTest {
 
     @Test
     void shouldCreateAndReadPerson() {
+        List<String> telephoneNumbers = List.of("0629731948", "0645859845");
         Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
-        Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+        Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE, telephoneNumbers);
         person.setAddress(address);
         repository.createPerson(person);
 
@@ -25,6 +27,7 @@ class PersonRepositoryTest {
         assertThat(createdPerson.getLastName()).isEqualTo("Roelofsen");
         assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
         assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
+        assertThat(createdPerson.getTelephoneNumbers()).hasSize(2).contains("0629731948", "0645859845");
 
         Address createdAddress = person.getAddress();
         assertThat(createdAddress).isNotNull();
@@ -37,8 +40,9 @@ class PersonRepositoryTest {
 
     @Test
     void shouldUpdatePerson() {
+        List<String> telephoneNumbers = List.of("0629731948", "0645859845");
         Address address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
-        Person person = new Person(2, "Willy", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+        Person person = new Person(2, "Willy", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE, telephoneNumbers);
         person.setAddress(address);
         repository.updatePerson(person);
 
@@ -48,6 +52,7 @@ class PersonRepositoryTest {
         assertThat(updatedPerson.getLastName()).isEqualTo("Roelofsen");
         assertThat(updatedPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
         assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
+        assertThat(updatedPerson.getTelephoneNumbers()).hasSize(2).contains("0629731948", "0645859845");
 
         Address createdAddress = updatedPerson.getAddress();
         assertThat(createdAddress).isNotNull();

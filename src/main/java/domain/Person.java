@@ -3,6 +3,7 @@ package domain;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Person {
@@ -15,13 +16,16 @@ public class Person {
     private Gender gender;
     @Embedded
     private Address address;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> telephoneNumbers;
 
-    public Person(int id, String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
+    public Person(int id, String firstName, String lastName, LocalDate dateOfBirth, Gender gender, List<String> telephoneNumbers) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
+        this.telephoneNumbers = telephoneNumbers;
     }
 
     public Person() {}
@@ -72,5 +76,13 @@ public class Person {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<String> getTelephoneNumbers() {
+        return telephoneNumbers;
+    }
+
+    public void setTelephoneNumbers(List<String> telephoneNumbers) {
+        this.telephoneNumbers = telephoneNumbers;
     }
 }
