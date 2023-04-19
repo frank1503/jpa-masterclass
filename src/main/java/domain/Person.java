@@ -17,7 +17,7 @@ public class Person {
     @Embedded
     private Address address;
 
-    //TODO 7b voeg het veld age toe, maar zorg ervoor dat deze niet als kolom in de tabel terecht komt.
+    //TODO 7b voeg het veld age (int) toe, maar zorg ervoor dat deze niet als kolom in de tabel terecht komt.
     // Maak daarna een methode die de age automatisch bepaalt als de entity wordt opgehaald uit de database
 
     public Person(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
