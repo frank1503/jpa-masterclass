@@ -1,6 +1,6 @@
 package domain;
 
-//TODO 6b voeg de juiste annotatie toe de non-args constructor en getters en setters
+//TODO 6b zorg dat Address als ingesloten object in de entity kan worden gebruikt
 public class Address {
     private String streetName;
     private String houseNumber;
