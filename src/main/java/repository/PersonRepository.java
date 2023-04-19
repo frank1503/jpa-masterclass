@@ -14,7 +14,7 @@ import java.time.LocalDate;
 // - id
 // - type
 // - color
-// - registrationplate
+// - registrationPlate
 // voeg kolom car_id toe aan de person tabel
 // tot slot, voer car.sql script uit
 public class PersonRepository {
