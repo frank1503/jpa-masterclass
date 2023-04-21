@@ -6,19 +6,20 @@ import domain.Person;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PersonRepositoryTest {
     private final PersonRepository repository = new PersonRepository();
-    private static int id;
 
     @Test
     void shouldCreateAndReadPerson() {
         Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
         Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         person.setAddress(address);
-        id = repository.createPerson(person);
+        person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
+        int id = repository.createPerson(person);
 
         Person createdPerson = repository.readPerson(id);
         assertThat(createdPerson).isNotNull();
@@ -42,10 +43,10 @@ class PersonRepositoryTest {
         Address address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
         Person person = new Person("Willy", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         person.setAddress(address);
-        person.setId(id);
+        person.setId(1);
         repository.updatePerson(person);
 
-        Person updatedPerson = repository.readPerson(id);
+        Person updatedPerson = repository.readPerson(1);
         assertThat(updatedPerson).isNotNull();
         assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
         assertThat(updatedPerson.getLastName()).isEqualTo("Roelofsen");
@@ -63,8 +64,8 @@ class PersonRepositoryTest {
 
     @Test
     void shouldDeletePerson() {
-        repository.deletePerson(id);
-        Person deletedPerson = repository.readPerson(id);
+        repository.deletePerson(1);
+        Person deletedPerson = repository.readPerson(1);
         assertThat(deletedPerson).isNull();
     }
 }

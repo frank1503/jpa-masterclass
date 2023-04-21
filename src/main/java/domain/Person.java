@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 @Entity
 public class Person {
@@ -18,6 +19,8 @@ public class Person {
     private Gender gender;
     @Embedded
     private Address address;
+    @ElementCollection
+    private List<String> telephoneNumbers;
     @Transient
     private int age;
 
@@ -85,5 +88,13 @@ public class Person {
 
     public int getAge() {
         return age;
+    }
+
+    public List<String> getTelephoneNumbers() {
+        return telephoneNumbers;
+    }
+
+    public void setTelephoneNumbers(List<String> telephoneNumbers) {
+        this.telephoneNumbers = telephoneNumbers;
     }
 }

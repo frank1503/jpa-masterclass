@@ -1,3 +1,4 @@
+drop table person_telephonenumbers;
 drop table person;
 drop table car;
 
@@ -14,6 +15,14 @@ create table person
     firstname   varchar(255),
     gender      varchar(255),
     lastname    varchar(255)
+);
+
+create table person_telephonenumbers
+(
+    person_id        integer not null
+        constraint fkij2vg4r8c9kt8mm5he2idgyva
+            references person,
+    telephonenumbers varchar(255)
 );
 
 create table car
