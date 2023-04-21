@@ -15,7 +15,9 @@ import java.time.LocalDate;
 // - housenumber
 // - zipcode
 // - city
-// - country voer daarna het person.sql script uit (test -> java -> resources)
+// - country
+// controleer voor de zekerheid dat Person met id = 1 niet in de tabel zit
+// voer daarna het person.sql script uit (test -> java -> resources)
 public class PersonRepository {
     private static final String URL = "jdbc:postgresql://localhost:5432/jpa";
     private static final String USER_NAME = "postgres";
