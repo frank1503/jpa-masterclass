@@ -3,6 +3,7 @@ package domain;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 //TODO 7 draai eerst het drop-and-create script zodat je met een schone database kan beginnen
 @Entity
@@ -16,6 +17,8 @@ public class Person {
     private Gender gender;
     @Embedded
     private Address address;
+    @ElementCollection
+    private List<String> telephoneNumbers;
 
     //TODO 7b voeg het veld age (int) toe, maar zorg ervoor dat deze niet als kolom in de tabel terecht komt.
     // Maak daarna een methode die de age automatisch bepaalt als de entity wordt opgehaald uit de database
@@ -75,5 +78,13 @@ public class Person {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<String> getTelephoneNumbers() {
+        return telephoneNumbers;
+    }
+
+    public void setTelephoneNumbers(List<String> telephoneNumbers) {
+        this.telephoneNumbers = telephoneNumbers;
     }
 }
