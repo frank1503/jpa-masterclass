@@ -18,7 +18,7 @@ class PersonRepositoryTest {
         Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
         Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         //person.setAddress(address);
-        //person.setTelephoneNumbers(List.of("0629731948", "0645859845"))
+        //person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
         repository.createPerson(person);
 
         Person createdPerson = repository.readPerson(2);
@@ -44,7 +44,7 @@ class PersonRepositoryTest {
         Address address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
         Person person = new Person(2, "Willy", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         //person.setAddress(address);
-        //person.setTelephoneNumbers(List.of("0629731948", "0645859845"))
+        //person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
         repository.updatePerson(person);
 
         Person updatedPerson = repository.readPerson(2);
