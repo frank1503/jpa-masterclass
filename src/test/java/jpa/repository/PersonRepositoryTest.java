@@ -77,6 +77,7 @@ class PersonRepositoryTest {
         person.setAddress(address);
         person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
         //person.setCar(car);
+        //car.setPerson(person);
         int id = personRepository.createPerson(person);
         entityManager.flush();
         entityManager.clear();
@@ -102,6 +103,7 @@ class PersonRepositoryTest {
         person.setAddress(address);
         person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
         //person.setCar(car);
+        //car.setPerson(person);
         int id = personRepository.createPerson(person);
         entityManager.flush();
         entityManager.clear();
