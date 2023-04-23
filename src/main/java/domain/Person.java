@@ -19,7 +19,7 @@ public class Person {
     private Gender gender;
     @Embedded
     private Address address;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> telephoneNumbers;
     @Transient
     private int age;
