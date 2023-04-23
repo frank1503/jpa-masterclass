@@ -28,7 +28,7 @@ public class CarRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
-    //TODO 10f haal de code uit commentaat en draai de unit test. Deze moeten slagen
+    //TODO 10f haal de code uit commentaar en draai de unit test. Deze moeten slagen
     @Sql({"/car_setup.sql"})
     @Test
     void shouldReadCar() {
@@ -47,7 +47,7 @@ public class CarRepositoryTest {
 //        assertThat(createdPerson.getAge()).isEqualTo(37);
     }
 
-    //TODO 10g haal de code uit commentaat en draai de unit test. Deze moeten slagen
+    //TODO 10g haal de code uit commentaar en draai de unit test. Deze moeten slagen
     @Sql({"/car_setup.sql"})
     @Test
     void shouldDeleteCar() {
