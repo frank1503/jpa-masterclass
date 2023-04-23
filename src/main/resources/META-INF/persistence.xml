@@ -6,15 +6,15 @@
                       transaction-type="RESOURCE_LOCAL">
         <properties>
             <!-- JDBC URL Server:Port/DBName -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jpa"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jpa"/>
             <!-- DB Driver -->
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <!-- DB User -->
-            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
             <!-- DB Password -->
-            <property name="javax.persistence.jdbc.password" value="mysecretpassword"/>
+            <property name="jakarta.persistence.jdbc.password" value="mysecretpassword"/>
             <!-- DB actions-->
-            <property name="javax.persistence.schema-generation.database.action" value="none"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
         </properties>
     </persistence-unit>
 
@@ -22,15 +22,15 @@
                       transaction-type="RESOURCE_LOCAL">
         <properties>
             <!-- JDBC URL Server:Port/DBName -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jpa"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jpa"/>
             <!-- DB Driver -->
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <!-- DB User -->
-            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
             <!-- DB Password -->
-            <property name="javax.persistence.jdbc.password" value="mysecretpassword"/>
+            <property name="jakarta.persistence.jdbc.password" value="mysecretpassword"/>
             <!-- DB actions-->
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>
     </persistence-unit>
 </persistence>
