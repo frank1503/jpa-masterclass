@@ -29,7 +29,7 @@ class PersonRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
-    //TODO 10b haal de code uit commentaat en draai de unit test. Deze moeten slagen
+    //TODO 10b haal de code uit commentaar en draai de unit test. Deze moeten slagen
     @Sql({"/person_setup.sql"})
     @Test
     void shouldCreateAndReadPerson() {
@@ -67,7 +67,7 @@ class PersonRepositoryTest {
 //        assertThat(createdCar.getColor()).isEqualTo("Blue");
     }
 
-    //TODO 10c haal de code uit commentaat en draai de unit test. Deze moeten slagen
+    //TODO 10c haal de code uit commentaar en draai de unit test. Deze moeten slagen
     @Sql({"/person_setup.sql"})
     @Test
     void shouldDeletePerson() {
@@ -92,7 +92,7 @@ class PersonRepositoryTest {
         assertThat(carNotFound).isNull();
     }
 
-    //TODO 10d haal de code uit commentaat en draai de unit test. Deze moeten slagen
+    //TODO 10d haal de code uit commentaar en draai de unit test. Deze moeten slagen
     @Sql({"/person_setup.sql"})
     @Test
     void shouldAlsoDeleteCarWhenSetToNull() {
