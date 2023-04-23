@@ -1,6 +1,6 @@
-drop table person_telephonenumbers;
-drop table person;
-drop table car;
+drop table if exists person_telephonenumbers;
+drop table if exists person;
+drop table if exists car;
 
 create table car
 (
@@ -37,3 +37,8 @@ create table person_telephonenumbers
             references person,
     telephonenumbers varchar(255)
 );
+
+INSERT INTO public.car (registrationplate, sequencenumber, brand, color) VALUES ('P-468-LJ', 1, 'Seat', 'Blue');
+INSERT INTO public.person (id, city, country, housenumber, streetname, zipcode, dateofbirth, firstname, gender, lastname, car_registrationplate, car_sequencenumber) VALUES (1, 'Eindhoven', 'Nederland', '10', 'Dolphijnstraat', '5632CZ', '1986-03-15', 'Frank', 'MALE', 'Rinkens', 'P-468-LJ', 1);
+INSERT INTO public.person_telephonenumbers (person_id, telephonenumbers) VALUES (1, '0629731948');
+INSERT INTO public.person_telephonenumbers (person_id, telephonenumbers) VALUES (1, '0696857471');

@@ -30,7 +30,7 @@ class PersonRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
-    @Sql({"/setup.sql"})
+    @Sql({"/person_setup.sql"})
     @Test
     void shouldCreateAndReadPerson() {
         Car car = new Car(1, "Seat", "Blue", "P-468-LJ");
@@ -67,7 +67,7 @@ class PersonRepositoryTest {
         assertThat(createdCar.getColor()).isEqualTo("Blue");
     }
 
-    @Sql({"/setup.sql"})
+    @Sql({"/person_setup.sql"})
     @Test
     void shouldDeletePerson() {
         Car car = new Car(1, "Seat", "Blue", "P-468-LJ");
@@ -91,7 +91,7 @@ class PersonRepositoryTest {
         assertThat(carNotFound).isNull();
     }
 
-    @Sql({"/setup.sql"})
+    @Sql({"/person_setup.sql"})
     @Test
     void shouldAlsoDeleteCarWhenSetToNull() {
         Car car = new Car(1, "Seat", "Blue", "P-468-LJ");
