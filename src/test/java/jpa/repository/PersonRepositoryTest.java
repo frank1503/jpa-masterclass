@@ -10,8 +10,9 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
+import jakarta.transaction.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,9 +31,11 @@ class PersonRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
-    @Sql({"/person_setup.sql"})
+    //@Sql({"/person_setup.sql"})
     @Test
     void shouldCreateAndReadPerson() {
+        Insurance carInsurance = new Insurance("Car", new BigDecimal("85.99"));
+        Insurance houseInsurance = new Insurance("House", new BigDecimal("105.99"));
         Car car = new Car(1, "Seat", "Blue", "P-468-LJ");
         Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
         Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
@@ -40,6 +43,10 @@ class PersonRepositoryTest {
         person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
         person.setCar(car);
         car.setPerson(person);
+        carInsurance.setPerson(person);
+        houseInsurance.setPerson(person);
+        person.setInsurances(List.of(carInsurance, houseInsurance));
+
         int id = personRepository.createPerson(person);
         entityManager.flush();
         entityManager.clear();
@@ -52,6 +59,9 @@ class PersonRepositoryTest {
         assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
         assertThat(createdPerson.getTelephoneNumbers()).hasSize(2).contains("0629731948", "0645859845");
         assertThat(createdPerson.getAge()).isEqualTo(37);
+        assertThat(createdPerson.getInsurances()).hasSize(2)
+                .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id", "person")
+                .contains(carInsurance, houseInsurance);
 
         Address createdAddress = person.getAddress();
         assertThat(createdAddress).isNotNull();
@@ -68,9 +78,11 @@ class PersonRepositoryTest {
         assertThat(createdCar.getColor()).isEqualTo("Blue");
     }
 
-    @Sql({"/person_setup.sql"})
+    //@Sql({"/person_setup.sql"})
     @Test
     void shouldDeletePerson() {
+        Insurance carInsurance = new Insurance("Car", new BigDecimal("85.99"));
+        Insurance houseInsurance = new Insurance("House", new BigDecimal("105.99"));
         Car car = new Car(1, "Seat", "Blue", "P-468-LJ");
         Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
         Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
@@ -78,6 +90,10 @@ class PersonRepositoryTest {
         person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
         person.setCar(car);
         car.setPerson(person);
+        carInsurance.setPerson(person);
+        houseInsurance.setPerson(person);
+        person.setInsurances(List.of(carInsurance, houseInsurance));
+
         int id = personRepository.createPerson(person);
         entityManager.flush();
         entityManager.clear();
@@ -91,6 +107,11 @@ class PersonRepositoryTest {
 
         Car carNotFound = entityManager.find(Car.class, new CarPK(1, "P-468-LJ"));
         assertThat(carNotFound).isNull();
+
+        Insurance carInsuranceNotFound = entityManager.find(Insurance.class, person.getInsurances().get(0).getId());
+        assertThat(carInsuranceNotFound).isNull();
+        Insurance houseInsuranceNotFound = entityManager.find(Insurance.class, person.getInsurances().get(1).getId());
+        assertThat(houseInsuranceNotFound).isNull();
     }
 
     @Sql({"/person_setup.sql"})

@@ -28,6 +28,13 @@ public class Person {
             , orphanRemoval = true
     )
     private Car car;
+    @OneToMany(
+            mappedBy = "person"
+            , cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+            //, fetch = FetchType.EAGER
+            , orphanRemoval = true
+    )
+    private List<Insurance> insurances;
 
     public Person(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
         this.firstName = firstName;
@@ -109,5 +116,13 @@ public class Person {
 
     public void setCar(Car car) {
         this.car = car;
+    }
+
+    public List<Insurance> getInsurances() {
+        return insurances;
+    }
+
+    public void setInsurances(List<Insurance> insurances) {
+        this.insurances = insurances;
     }
 }
