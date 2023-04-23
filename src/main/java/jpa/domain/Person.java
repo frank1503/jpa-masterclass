@@ -23,11 +23,9 @@ public class Person {
     private List<String> telephoneNumbers;
     @Transient
     private int age;
-    @OneToOne(
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
-            , orphanRemoval = true
-    )
-    private Car car;
+
+    //TODO 10a zorg voor een bidirectionele relatie tussen Person en Car waarbij Person de eigenaar is van de relatie
+
 
     public Person(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
         this.firstName = firstName;
@@ -101,13 +99,5 @@ public class Person {
 
     public void setTelephoneNumbers(List<String> telephoneNumbers) {
         this.telephoneNumbers = telephoneNumbers;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
     }
 }

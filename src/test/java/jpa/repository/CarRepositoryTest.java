@@ -28,6 +28,7 @@ public class CarRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
+    //TODO 10f haal de code uit commentaat en draai de unit test. Deze moeten slagen
     @Sql({"/car_setup.sql"})
     @Test
     void shouldReadCar() {
@@ -39,13 +40,14 @@ public class CarRepositoryTest {
         assertThat(createdCar.getColor()).isEqualTo("Blue");
         assertThat(createdCar.getRegistrationPlate()).isEqualTo("P-468-LJ");
 
-        Person createdPerson = createdCar.getPerson();
-        assertThat(createdPerson).isNotNull();
-        assertThat(createdPerson.getFirstName()).isEqualTo("Frank");
-        assertThat(createdPerson.getTelephoneNumbers()).hasSize(2);
-        assertThat(createdPerson.getAge()).isEqualTo(37);
+//        Person createdPerson = createdCar.getPerson();
+//        assertThat(createdPerson).isNotNull();
+//        assertThat(createdPerson.getFirstName()).isEqualTo("Frank");
+//        assertThat(createdPerson.getTelephoneNumbers()).hasSize(2);
+//        assertThat(createdPerson.getAge()).isEqualTo(37);
     }
 
+    //TODO 10g haal de code uit commentaat en draai de unit test. Deze moeten slagen
     @Sql({"/car_setup.sql"})
     @Test
     void shouldDeleteCar() {
@@ -61,6 +63,6 @@ public class CarRepositoryTest {
         Person person = entityManager.find(Person.class, 1);
         assertThat(person).isNotNull();
         assertThat(person.getFirstName()).isEqualTo("Frank");
-        assertThat(person.getCar()).isNull();
+        //assertThat(person.getCar()).isNull();
     }
 }

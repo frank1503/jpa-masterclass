@@ -13,8 +13,6 @@ public class Car {
     private int sequenceNumber;
     private String brand;
     private String color;
-    @OneToOne(mappedBy = "car")
-    private Person person;
 
     public Car() {
     }
@@ -56,13 +54,5 @@ public class Car {
 
     public void setRegistrationPlate(String registrationPlate) {
         this.registrationPlate = registrationPlate;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 }

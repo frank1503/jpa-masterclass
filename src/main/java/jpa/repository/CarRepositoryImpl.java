@@ -28,8 +28,6 @@ public class CarRepositoryImpl implements CarRepository {
 
     @Override
     public void deleteCar(CarPK carPK) {
-        Car car = entityManager.find(Car.class, carPK);
-        car.getPerson().setCar(null);
-        entityManager.remove(car);
+        //TODO 10e zorg dat Car verwijderd kan worden
     }
 }

@@ -17,7 +17,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 @ExtendWith(SpringExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @SpringBootTest(classes = JpaApplication.class)
@@ -30,6 +29,7 @@ class PersonRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
+    //TODO 10b haal de code uit commentaat en draai de unit test. Deze moeten slagen
     @Sql({"/person_setup.sql"})
     @Test
     void shouldCreateAndReadPerson() {
@@ -38,7 +38,7 @@ class PersonRepositoryTest {
         Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         person.setAddress(address);
         person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
-        person.setCar(car);
+        //person.setCar(car);
         int id = personRepository.createPerson(person);
         entityManager.flush();
         entityManager.clear();
@@ -60,13 +60,14 @@ class PersonRepositoryTest {
         assertThat(createdAddress.getCity()).isEqualTo("Leerdam");
         assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
 
-        Car createdCar = person.getCar();
-        assertThat(createdCar.getRegistrationPlate()).isEqualTo("P-468-LJ");
-        assertThat(createdCar.getSequenceNumber()).isEqualTo(1);
-        assertThat(createdCar.getBrand()).isEqualTo("Seat");
-        assertThat(createdCar.getColor()).isEqualTo("Blue");
+//        Car createdCar = person.getCar();
+//        assertThat(createdCar.getRegistrationPlate()).isEqualTo("P-468-LJ");
+//        assertThat(createdCar.getSequenceNumber()).isEqualTo(1);
+//        assertThat(createdCar.getBrand()).isEqualTo("Seat");
+//        assertThat(createdCar.getColor()).isEqualTo("Blue");
     }
 
+    //TODO 10c haal de code uit commentaat en draai de unit test. Deze moeten slagen
     @Sql({"/person_setup.sql"})
     @Test
     void shouldDeletePerson() {
@@ -75,7 +76,7 @@ class PersonRepositoryTest {
         Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         person.setAddress(address);
         person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
-        person.setCar(car);
+        //person.setCar(car);
         int id = personRepository.createPerson(person);
         entityManager.flush();
         entityManager.clear();
@@ -91,6 +92,7 @@ class PersonRepositoryTest {
         assertThat(carNotFound).isNull();
     }
 
+    //TODO 10d haal de code uit commentaat en draai de unit test. Deze moeten slagen
     @Sql({"/person_setup.sql"})
     @Test
     void shouldAlsoDeleteCarWhenSetToNull() {
@@ -99,13 +101,13 @@ class PersonRepositoryTest {
         Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         person.setAddress(address);
         person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
-        person.setCar(car);
+        //person.setCar(car);
         int id = personRepository.createPerson(person);
         entityManager.flush();
         entityManager.clear();
 
         Person createdPerson = personRepository.readPerson(id);
-        createdPerson.setCar(null);
+        //createdPerson.setCar(null);
 
         personRepository.deletePerson(id);
         entityManager.flush();
