@@ -1,10 +1,7 @@
 package jpa.domain;
 
 import domain.AuditTrailerListener;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
+import jakarta.persistence.*;
 
 @EntityListeners(AuditTrailerListener.class)
 @Entity
@@ -16,6 +13,8 @@ public class Car {
     private int sequenceNumber;
     private String brand;
     private String color;
+    @OneToOne(mappedBy = "car")
+    private Person person;
 
     public Car() {
     }
@@ -57,5 +56,13 @@ public class Car {
 
     public void setRegistrationPlate(String registrationPlate) {
         this.registrationPlate = registrationPlate;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }

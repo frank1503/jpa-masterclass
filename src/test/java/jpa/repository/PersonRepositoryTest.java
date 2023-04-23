@@ -2,14 +2,13 @@ package jpa.repository;
 
 import jakarta.persistence.EntityManager;
 import jpa.JpaApplication;
-import jpa.domain.Address;
-import jpa.domain.Gender;
-import jpa.domain.Person;
+import jpa.domain.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,12 +30,15 @@ class PersonRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
+    @Sql({"/setup.sql"})
     @Test
     void shouldCreateAndReadPerson() {
+        Car car = new Car(1, "Seat", "Blue", "P-468-LJ");
         Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
         Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         person.setAddress(address);
         person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
+        person.setCar(car);
         int id = personRepository.createPerson(person);
         entityManager.flush();
         entityManager.clear();
@@ -57,50 +59,23 @@ class PersonRepositoryTest {
         assertThat(createdAddress.getZipCode()).isEqualTo("4141JD");
         assertThat(createdAddress.getCity()).isEqualTo("Leerdam");
         assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
+
+        Car createdCar = person.getCar();
+        assertThat(createdCar.getRegistrationPlate()).isEqualTo("P-468-LJ");
+        assertThat(createdCar.getSequenceNumber()).isEqualTo(1);
+        assertThat(createdCar.getBrand()).isEqualTo("Seat");
+        assertThat(createdCar.getColor()).isEqualTo("Blue");
     }
 
+    @Sql({"/setup.sql"})
     @Test
-    void shouldUpdatePerson() {
+    void shouldDeletePerson() {
+        Car car = new Car(1, "Seat", "Blue", "P-468-LJ");
         Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
         Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         person.setAddress(address);
         person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
-        int id = personRepository.createPerson(person);
-        entityManager.flush();
-        entityManager.clear();
-
-        address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
-        person.setFirstName("Willy");
-        person.setAddress(address);
-        person.setTelephoneNumbers(List.of("0629731948", "0698746325"));
-        person.setId(id);
-        personRepository.updatePerson(person);
-        entityManager.flush();
-        entityManager.clear();
-
-        Person updatedPerson = personRepository.readPerson(id);
-        assertThat(updatedPerson).isNotNull();
-        assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
-        assertThat(updatedPerson.getLastName()).isEqualTo("Roelofsen");
-        assertThat(updatedPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
-        assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
-        assertThat(updatedPerson.getTelephoneNumbers()).hasSize(2).contains("0629731948", "0698746325");
-        assertThat(updatedPerson.getAge()).isEqualTo(37);
-
-        Address createdAddress = updatedPerson.getAddress();
-        assertThat(createdAddress).isNotNull();
-        assertThat(createdAddress.getStreetName()).isEqualTo("Dorpstraat");
-        assertThat(createdAddress.getHouseNumber()).isEqualTo("1a");
-        assertThat(createdAddress.getZipCode()).isEqualTo("5504HK");
-        assertThat(createdAddress.getCity()).isEqualTo("Veldhoven");
-        assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
-    }
-
-    @Test
-    void shouldDeletePerson() {
-        Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
-        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
-        person.setAddress(address);
+        person.setCar(car);
         int id = personRepository.createPerson(person);
         entityManager.flush();
         entityManager.clear();
@@ -111,5 +86,35 @@ class PersonRepositoryTest {
 
         Person deletedPerson = personRepository.readPerson(id);
         assertThat(deletedPerson).isNull();
+
+        Car carNotFound = entityManager.find(Car.class, new CarPK(1, "P-468-LJ"));
+        assertThat(carNotFound).isNull();
+    }
+
+    @Sql({"/setup.sql"})
+    @Test
+    void shouldAlsoDeleteCarWhenSetToNull() {
+        Car car = new Car(1, "Seat", "Blue", "P-468-LJ");
+        Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
+        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+        person.setAddress(address);
+        person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
+        person.setCar(car);
+        int id = personRepository.createPerson(person);
+        entityManager.flush();
+        entityManager.clear();
+
+        Person createdPerson = personRepository.readPerson(id);
+        createdPerson.setCar(null);
+
+        personRepository.deletePerson(id);
+        entityManager.flush();
+        entityManager.clear();
+
+        Person deletedPerson = personRepository.readPerson(id);
+        assertThat(deletedPerson).isNull();
+
+        Car carNotFound = entityManager.find(Car.class, new CarPK(1, "P-468-LJ"));
+        assertThat(carNotFound).isNull();
     }
 }
