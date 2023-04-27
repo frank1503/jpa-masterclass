@@ -13,13 +13,13 @@ public class Car {
     private int sequenceNumber;
     private String brand;
     private String color;
-    @OneToOne(mappedBy = "car")
+    @OneToOne(mappedBy = "car", cascade = CascadeType.PERSIST)
     private Person person;
 
     public Car() {
     }
 
-    public Car(int sequenceNumber, String brand, String color, String registrationPlate) {
+    public Car(int sequenceNumber, String registrationPlate, String brand, String color) {
         this.sequenceNumber = sequenceNumber;
         this.brand = brand;
         this.color = color;

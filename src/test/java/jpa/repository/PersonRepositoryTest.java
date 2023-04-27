@@ -1,6 +1,7 @@
 package jpa.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import jpa.JpaApplication;
 import jpa.domain.*;
 import org.junit.jupiter.api.Test;
@@ -8,9 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import jakarta.transaction.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -31,12 +30,13 @@ class PersonRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
-    //@Sql({"/person_setup.sql"})
     @Test
     void shouldCreateAndReadPerson() {
+        SportsClub soccerClub = new SportsClub("FC De Treffers");
+        SportsClub tennisClub = new SportsClub("TC De Aces");
         Insurance carInsurance = new Insurance("Car", new BigDecimal("85.99"));
         Insurance houseInsurance = new Insurance("House", new BigDecimal("105.99"));
-        Car car = new Car(1, "Seat", "Blue", "P-468-LJ");
+        Car car = new Car(1, "P-468-LJ", "Seat", "Blue");
         Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
         Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
         person.setAddress(address);
@@ -46,12 +46,14 @@ class PersonRepositoryTest {
         carInsurance.setPerson(person);
         houseInsurance.setPerson(person);
         person.setInsurances(List.of(carInsurance, houseInsurance));
+        person.addSportsClub(soccerClub);
+        person.addSportsClub(tennisClub);
 
-        int id = personRepository.createPerson(person);
+        personRepository.createPerson(person);
         entityManager.flush();
         entityManager.clear();
 
-        Person createdPerson = personRepository.readPerson(id);
+        Person createdPerson = personRepository.readPerson(person.getId());
         assertThat(createdPerson).isNotNull();
         assertThat(createdPerson.getFirstName()).isEqualTo("Rick");
         assertThat(createdPerson.getLastName()).isEqualTo("Roelofsen");
@@ -62,6 +64,9 @@ class PersonRepositoryTest {
         assertThat(createdPerson.getInsurances()).hasSize(2)
                 .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id", "person")
                 .contains(carInsurance, houseInsurance);
+        assertThat(createdPerson.getSportsClubs()).hasSize(2)
+                .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id", "members")
+                .contains(soccerClub, tennisClub);
 
         Address createdAddress = person.getAddress();
         assertThat(createdAddress).isNotNull();
@@ -78,7 +83,6 @@ class PersonRepositoryTest {
         assertThat(createdCar.getColor()).isEqualTo("Blue");
     }
 
-    //@Sql({"/person_setup.sql"})
     @Test
     void shouldDeletePerson() {
         Insurance carInsurance = new Insurance("Car", new BigDecimal("85.99"));
@@ -114,7 +118,6 @@ class PersonRepositoryTest {
         assertThat(houseInsuranceNotFound).isNull();
     }
 
-    @Sql({"/person_setup.sql"})
     @Test
     void shouldAlsoDeleteCarWhenSetToNull() {
         Car car = new Car(1, "Seat", "Blue", "P-468-LJ");

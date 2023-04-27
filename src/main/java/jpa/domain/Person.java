@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,7 @@ public class Person {
     @Embedded
     private Address address;
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> telephoneNumbers;
+    private List<String> telephoneNumbers = new ArrayList<>();
     @Transient
     private int age;
     @OneToOne(
@@ -31,10 +32,16 @@ public class Person {
     @OneToMany(
             mappedBy = "person"
             , cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
-            //, fetch = FetchType.EAGER
+            , fetch = FetchType.EAGER
             , orphanRemoval = true
     )
-    private List<Insurance> insurances;
+    private List<Insurance> insurances = new ArrayList<>();
+    @ManyToMany(
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER
+    )
+    private List<SportsClub> sportsClubs = new ArrayList<>();
+
 
     public Person(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
         this.firstName = firstName;
@@ -124,5 +131,18 @@ public class Person {
 
     public void setInsurances(List<Insurance> insurances) {
         this.insurances = insurances;
+    }
+
+    public List<SportsClub> getSportsClubs() {
+        return sportsClubs;
+    }
+
+    public void setSportsClubs(List<SportsClub> sportsClubs) {
+        this.sportsClubs = sportsClubs;
+    }
+
+    public void addSportsClub(SportsClub sportsClub) {
+        sportsClub.getMembers().add(this);
+        this.sportsClubs.add(sportsClub);
     }
 }

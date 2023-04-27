@@ -15,7 +15,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -44,7 +43,7 @@ public class InsuranceRepositoryTest {
         entityManager.flush();
         entityManager.clear();
 
-        Person createdPerson = entityManager.find(Person.class, 1);
+        Person createdPerson = entityManager.find(Person.class, person.getId());
         assertThat(createdPerson.getInsurances()).hasSize(1);
     }
 
