@@ -1,8 +1,15 @@
 package jpa.domain;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
+@AttributeOverride(name = "streetName", column = @Column(name = "A_STREET_NAME"))
+@AttributeOverride(name = "houseNumber", column = @Column(name = "A_HOUSE_NUMBER"))
+@AttributeOverride(name = "zipCode", column = @Column(name = "A_ZIP_CODE"))
+@AttributeOverride(name = "city", column = @Column(name = "A_CITY"))
+@AttributeOverride(name = "country", column = @Column(name = "A_COUNTRY"))
 public class Address {
     private String streetName;
     private String houseNumber;

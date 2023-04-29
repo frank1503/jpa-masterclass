@@ -5,13 +5,18 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "X_VERSICHERUNG")
 public class Insurance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "X_VER_ID")
     private int id;
+    @Column(name = "X_VER_TYP")
     private String type;
+    @Column(name = "X_IST_RATE_DM")
     private BigDecimal pricePerMonth;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "P_ID")
     private Person person;
 
     public Insurance() {
