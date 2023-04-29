@@ -7,28 +7,22 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO 12: Zorg daarna dat alle entities juist geconfigureerd worden en draai de unit testen. Deze moeten slagen
+
 @Entity
-@Table(name = "XAT403")
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "P_ID")
     private int id;
-    @Column(name = "P_FIRST_NAME")
     private String firstName;
-    @Column(name = "P_LAST_NAME")
     private String lastName;
-    @Column(name = "P_DATE_OF_BIRTH")
     private LocalDate dateOfBirth;
     @Enumerated(EnumType.STRING)
-    @Column(name = "P_GENDER")
     private Gender gender;
     @Embedded
     private Address address;
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "TELEFOONNUMMERS", joinColumns = @JoinColumn(name = "P_ID"))
-    @Column(name = "TELEFOONNUMMER")
     private List<String> telephoneNumbers = new ArrayList<>();
     @Transient
     private int age;
@@ -37,10 +31,6 @@ public class Person {
             , orphanRemoval = true
 
     )
-    @JoinColumns({
-            @JoinColumn(name = "X_NUMSCHILD", referencedColumnName = "X_NUMMERNSCHILD"),
-            @JoinColumn(name = "X_SERIENNUM", referencedColumnName = "X_SERIENNUMMER")
-    })
     private Car car;
     @OneToMany(
             mappedBy = "person"
@@ -53,10 +43,6 @@ public class Person {
             cascade = CascadeType.PERSIST,
             fetch = FetchType.EAGER
     )
-    @JoinTable(
-            name = "PERSON_TO_CLUB"
-            , joinColumns = @JoinColumn(name = "P_ID")
-            , inverseJoinColumns = @JoinColumn(name = "SC_ID"))
     private List<SportsClub> sportsClubs = new ArrayList<>();
 
 

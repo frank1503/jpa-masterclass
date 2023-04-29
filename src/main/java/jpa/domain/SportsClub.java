@@ -6,13 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "XAT462")
 public class SportsClub {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SC_ID")
     private int id;
-    @Column(name = "SC_NAME")
     private String name;
 
     @ManyToMany(mappedBy = "sportsClubs", cascade = CascadeType.PERSIST)

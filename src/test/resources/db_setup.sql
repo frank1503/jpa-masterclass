@@ -1,3 +1,15 @@
+drop table if exists telefoonnummers cascade;
+
+drop table if exists x_versicherung cascade;
+
+drop table if exists person_to_club cascade;
+
+drop table if exists xat403 cascade;
+
+drop table if exists x_person_objekt cascade;
+
+drop table if exists xat462 cascade;
+
 create table x_person_objekt
 (
     x_nummernschild varchar(255) not null,
