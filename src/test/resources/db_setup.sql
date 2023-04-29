@@ -49,7 +49,7 @@ create table x_versicherung
         primary key,
     x_ist_rate_dm numeric(38, 2),
     x_ver_typ     varchar(255),
-    p_id          integer
+    fk_p_id       integer
         constraint fklntjnucor0t9ni37n09v5soix
             references xat403
 );

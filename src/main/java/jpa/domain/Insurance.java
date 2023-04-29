@@ -16,7 +16,7 @@ public class Insurance {
     @Column(name = "X_IST_RATE_DM")
     private BigDecimal pricePerMonth;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "P_ID")
+    @JoinColumn(name = "FK_P_ID", referencedColumnName = "P_ID")
     private Person person;
 
     public Insurance() {
