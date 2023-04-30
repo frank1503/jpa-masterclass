@@ -2,10 +2,17 @@ package jpa.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import jpa.domain.Car;
-import jpa.domain.CarPK;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -15,21 +22,17 @@ public class CarRepositoryImpl implements CarRepository {
     EntityManager entityManager;
 
     @Override
-    public Car readCar(CarPK carPK) {
-        return entityManager.find(Car.class, carPK);
-    }
+    public Car findCarByBrandAndColor(String brand, String color) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Car> criteriaQuery = builder.createQuery(Car.class);
+        Root<Car> c = criteriaQuery.from(Car.class);
 
-    @Override
-    public CarPK createCar(Car car) {
-        entityManager.persist(car);
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.equal(c.get("brand"), brand));
+        predicates.add(builder.equal(c.get("color"), color));
+        criteriaQuery.where(predicates.toArray(new Predicate[0]));
 
-        return new CarPK(car.getSequenceNumber(), car.getRegistrationPlate());
-    }
-
-    @Override
-    public void deleteCar(CarPK carPK) {
-        Car car = entityManager.find(Car.class, carPK);
-        car.getPerson().setCar(null);
-        entityManager.remove(car);
+        TypedQuery<Car> query = entityManager.createQuery(criteriaQuery);
+        return query.getSingleResult();
     }
 }

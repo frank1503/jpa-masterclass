@@ -6,17 +6,12 @@ import jakarta.persistence.*;
 @EntityListeners(AuditTrailerListener.class)
 @Entity
 @IdClass(CarPK.class)
-@Table(name = "X_PERSON_OBJEKT")
 public class Car {
     @Id
-    @Column(name = "X_NUMMERNSCHILD")
     private String registrationPlate;
     @Id
-    @Column(name = "X_SERIENNUMMER")
     private int sequenceNumber;
-    @Column(name = "X_MARKE")
     private String brand;
-    @Column(name = "X_FARBE")
     private String color;
     @OneToOne(mappedBy = "car", cascade = CascadeType.PERSIST)
     private Person person;

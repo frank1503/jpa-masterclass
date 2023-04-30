@@ -10,85 +10,123 @@ drop table if exists x_person_objekt cascade;
 
 drop table if exists xat462 cascade;
 
-create table x_person_objekt
+drop table if exists insurance cascade;
+
+drop table if exists person_telephonenumbers cascade;
+
+drop table if exists person_sportsclubs cascade;
+
+drop table if exists person cascade;
+
+drop table if exists car cascade;
+
+drop table if exists sportsclub cascade;
+
+create table car
 (
-    x_nummernschild varchar(255) not null,
-    x_seriennummer  integer      not null,
-    x_marke         varchar(255),
-    x_farbe         varchar(255),
-    primary key (x_nummernschild, x_seriennummer)
+    registrationplate varchar(255) not null,
+    sequencenumber    integer      not null,
+    brand             varchar(255),
+    color             varchar(255),
+    primary key (registrationplate, sequencenumber)
 );
 
-alter table x_person_objekt
+alter table car
     owner to postgres;
 
-create table xat403
+create table person
 (
-    p_id            serial
+    id                    serial
         primary key,
-    a_city          varchar(255),
-    a_country       varchar(255),
-    a_house_number  varchar(255),
-    a_street_name   varchar(255),
-    a_zip_code      varchar(255),
-    p_date_of_birth date,
-    p_first_name    varchar(255),
-    p_gender        varchar(255),
-    p_last_name     varchar(255),
-    x_numschild     varchar(255),
-    x_seriennum     integer,
-    constraint fk2k1pnmv0njul5pwevlgysqn7k
-        foreign key (x_numschild, x_seriennum) references x_person_objekt
+    city                  varchar(255),
+    country               varchar(255),
+    housenumber           varchar(255),
+    streetname            varchar(255),
+    zipcode               varchar(255),
+    dateofbirth           date,
+    firstname             varchar(255),
+    gender                varchar(255),
+    lastname              varchar(255),
+    car_registrationplate varchar(255),
+    car_sequencenumber    integer,
+    constraint fk5o8otu2be52jalkqsvm74qohx
+        foreign key (car_registrationplate, car_sequencenumber) references car
 );
 
-alter table xat403
+alter table person
     owner to postgres;
 
-create table telefoonnummers
+create table insurance
 (
-    p_id           integer not null
-        constraint fk3dek7upvh3u37dqbo5if6jgbs
-            references xat403,
-    telefoonnummer varchar(255)
-);
-
-alter table telefoonnummers
-    owner to postgres;
-
-create table x_versicherung
-(
-    x_ver_id      serial
+    id            serial
         primary key,
-    x_ist_rate_dm numeric(38, 2),
-    x_ver_typ     varchar(255),
-    fk_p_id       integer
-        constraint fklntjnucor0t9ni37n09v5soix
-            references xat403
+    pricepermonth numeric(38, 2),
+    type          varchar(255),
+    person_id     integer
+        constraint fkgprnn3lt5f3ubwpb9dlh6bet1
+            references person
 );
 
-alter table x_versicherung
+alter table insurance
     owner to postgres;
 
-create table xat462
+create table person_telephonenumbers
 (
-    sc_id   serial
+    person_id        integer not null
+        constraint fkij2vg4r8c9kt8mm5he2idgyva
+            references person,
+    telephonenumbers varchar(255)
+);
+
+alter table person_telephonenumbers
+    owner to postgres;
+
+create table sportsclub
+(
+    id   serial
         primary key,
-    sc_name varchar(255)
+    name varchar(255)
 );
 
-alter table xat462
+alter table sportsclub
     owner to postgres;
 
-create table person_to_club
+create table person_sportsclubs
 (
-    p_id  integer not null
-        constraint fkr4v089890s2vaxf9q3k3n2vgn
-            references xat403,
-    sc_id integer not null
-        constraint fk5pby558axbkpbolp4kujp9n2g
-            references xat462
+    members_id     integer not null
+        constraint fkbdylvxu03q5p0acf1mpxkt4y4
+            references person,
+    sportsclubs_id integer not null
+        constraint fk8xectdnlwrfkqd6qi8aohsbuk
+            references sportsclub
 );
 
-alter table person_to_club
+alter table person_sportsclubs
     owner to postgres;
+
+INSERT INTO public.car (registrationplate, sequencenumber, brand, color) VALUES ('P-468-LJ', 1, 'Seat', 'Blue');
+INSERT INTO public.car (registrationplate, sequencenumber, brand, color) VALUES ('HH-DF-33', 1, 'Ford', 'Green');
+
+INSERT INTO public.person (id, city, country, housenumber, streetname, zipcode, dateofbirth, firstname, gender, lastname, car_registrationplate, car_sequencenumber) VALUES (1, 'Eindhoven', 'Nederland', '10', 'Dolphijnstraat', '5632CZ', '1986-03-15', 'Frank', 'MALE', 'Rinkens', 'P-468-LJ', 1);
+INSERT INTO public.person (id, city, country, housenumber, streetname, zipcode, dateofbirth, firstname, gender, lastname, car_registrationplate, car_sequencenumber) VALUES (2, 'Leerdam', 'Nederland', '7', 'Frederik Hendrikstraat', '4141JD', '1986-03-15', 'Rick', 'MALE', 'Roelofsen', 'HH-DF-33', 1);
+
+INSERT INTO public.person_telephonenumbers (person_id, telephonenumbers) VALUES (1, '0629731948');
+INSERT INTO public.person_telephonenumbers (person_id, telephonenumbers) VALUES (1, '0645859845');
+INSERT INTO public.person_telephonenumbers (person_id, telephonenumbers) VALUES (2, '0659485231');
+INSERT INTO public.person_telephonenumbers (person_id, telephonenumbers) VALUES (2, '0694164973');
+
+INSERT INTO public.insurance (id, pricepermonth, type, person_id) VALUES (1, 48.99, 'car', 1);
+INSERT INTO public.insurance (id, pricepermonth, type, person_id) VALUES (2, 105.99, 'house', 1);
+INSERT INTO public.insurance (id, pricepermonth, type, person_id) VALUES (3, 55.99, 'car', 2);
+INSERT INTO public.insurance (id, pricepermonth, type, person_id) VALUES (4, 155.99, 'house', 2);
+
+INSERT INTO public.sportsclub (id, name) VALUES (1, 'CobraKai');
+INSERT INTO public.sportsclub (id, name) VALUES (2, 'FC De Treffers');
+
+INSERT INTO public.person_sportsclubs (members_id, sportsclubs_id) VALUES (1, 1);
+INSERT INTO public.person_sportsclubs (members_id, sportsclubs_id) VALUES (1, 2);
+INSERT INTO public.person_sportsclubs (members_id, sportsclubs_id) VALUES (2, 1);
+INSERT INTO public.person_sportsclubs (members_id, sportsclubs_id) VALUES (2, 2);
+
+
 

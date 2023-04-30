@@ -3,17 +3,16 @@ package jpa.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import jpa.JpaApplication;
-import jpa.domain.*;
+import jpa.domain.Car;
+import jpa.domain.Person;
+import jpa.domain.SportsClub;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +22,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @SpringBootTest(classes = JpaApplication.class)
 @Transactional
-@Sql("/db_setup.sql")
 class PersonRepositoryTest {
 
     @Autowired
@@ -33,117 +31,51 @@ class PersonRepositoryTest {
     private EntityManager entityManager;
 
     @Test
-    void shouldCreateAndReadPerson() {
-        SportsClub soccerClub = new SportsClub("FC De Treffers");
-        SportsClub tennisClub = new SportsClub("TC De Aces");
-        Insurance carInsurance = new Insurance("Car", new BigDecimal("85.99"));
-        Insurance houseInsurance = new Insurance("House", new BigDecimal("105.99"));
-        Car car = new Car(1, "P-468-LJ", "Seat", "Blue");
-        Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
-        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
-        person.setAddress(address);
-        person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
-        person.setCar(car);
-        car.setPerson(person);
-        carInsurance.setPerson(person);
-        houseInsurance.setPerson(person);
-        person.setInsurances(List.of(carInsurance, houseInsurance));
-        person.addSportsClub(soccerClub);
-        person.addSportsClub(tennisClub);
+    void shouldReadPersons() {
+        List<Person> result = personRepository.findAllPersons();
+        assertThat(result).hasSize(2);
 
-        personRepository.createPerson(person);
-        entityManager.flush();
-        entityManager.clear();
+        Person frank = result.get(0);
+        assertThat(frank.getFirstName()).isEqualTo("Frank");
 
-        Person createdPerson = personRepository.readPerson(person.getId());
-        assertThat(createdPerson).isNotNull();
-        assertThat(createdPerson.getFirstName()).isEqualTo("Rick");
-        assertThat(createdPerson.getLastName()).isEqualTo("Roelofsen");
-        assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
-        assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
-        assertThat(createdPerson.getTelephoneNumbers()).hasSize(2).contains("0629731948", "0645859845");
-        assertThat(createdPerson.getAge()).isEqualTo(37);
-        assertThat(createdPerson.getInsurances()).hasSize(2)
-                .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id", "person")
-                .contains(carInsurance, houseInsurance);
-        assertThat(createdPerson.getSportsClubs()).hasSize(2)
-                .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id", "members")
-                .contains(soccerClub, tennisClub);
-
-        Address createdAddress = person.getAddress();
-        assertThat(createdAddress).isNotNull();
-        assertThat(createdAddress.getStreetName()).isEqualTo("Frederik Hendrikstraat");
-        assertThat(createdAddress.getHouseNumber()).isEqualTo("7");
-        assertThat(createdAddress.getZipCode()).isEqualTo("4141JD");
-        assertThat(createdAddress.getCity()).isEqualTo("Leerdam");
-        assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
-
-        Car createdCar = person.getCar();
-        assertThat(createdCar.getRegistrationPlate()).isEqualTo("P-468-LJ");
-        assertThat(createdCar.getSequenceNumber()).isEqualTo(1);
-        assertThat(createdCar.getBrand()).isEqualTo("Seat");
-        assertThat(createdCar.getColor()).isEqualTo("Blue");
+        Person rick = result.get(1);
+        assertThat(rick.getFirstName()).isEqualTo("Rick");
     }
 
     @Test
-    void shouldDeletePerson() {
-        Insurance carInsurance = new Insurance("Car", new BigDecimal("85.99"));
-        Insurance houseInsurance = new Insurance("House", new BigDecimal("105.99"));
-        Car car = new Car(1, "Seat", "Blue", "P-468-LJ");
-        Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
-        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
-        person.setAddress(address);
-        person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
-        person.setCar(car);
-        car.setPerson(person);
-        carInsurance.setPerson(person);
-        houseInsurance.setPerson(person);
-        person.setInsurances(List.of(carInsurance, houseInsurance));
-
-        int id = personRepository.createPerson(person);
-        entityManager.flush();
-        entityManager.clear();
-
-        personRepository.deletePerson(id);
-        entityManager.flush();
-        entityManager.clear();
-
-        Person deletedPerson = personRepository.readPerson(id);
-        assertThat(deletedPerson).isNull();
-
-        Car carNotFound = entityManager.find(Car.class, new CarPK(1, "P-468-LJ"));
-        assertThat(carNotFound).isNull();
-
-        Insurance carInsuranceNotFound = entityManager.find(Insurance.class, person.getInsurances().get(0).getId());
-        assertThat(carInsuranceNotFound).isNull();
-        Insurance houseInsuranceNotFound = entityManager.find(Insurance.class, person.getInsurances().get(1).getId());
-        assertThat(houseInsuranceNotFound).isNull();
+    void shouldFindPersonByFirstName() {
+        Person frank = personRepository.findPersonByFirstName("Frank");
+        assertThat(frank.getFirstName()).isEqualTo("Frank");
     }
 
     @Test
-    void shouldAlsoDeleteCarWhenSetToNull() {
-        Car car = new Car(1, "Seat", "Blue", "P-468-LJ");
-        Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
-        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
-        person.setAddress(address);
-        person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
-        person.setCar(car);
-        car.setPerson(person);
-        int id = personRepository.createPerson(person);
-        entityManager.flush();
-        entityManager.clear();
+    void shouldFindPersonByCarBrand() {
+        List<Person> result = personRepository.findPersonByCarBrand("Seat");
+        assertThat(result).hasSize(1);
 
-        Person createdPerson = personRepository.readPerson(id);
-        createdPerson.setCar(null);
+        Person frank = result.get(0);
+        assertThat(frank.getFirstName()).isEqualTo("Frank");
+        Car seat = frank.getCar();
+        assertThat(seat.getBrand()).isEqualTo("Seat");
+    }
 
-        personRepository.deletePerson(id);
-        entityManager.flush();
-        entityManager.clear();
+    @Test
+    void shouldFindPersonsBySportClub() {
+        List<Person> result = personRepository.findPersonsWithSportClub();
+        assertThat(result).hasSize(2);
 
-        Person deletedPerson = personRepository.readPerson(id);
-        assertThat(deletedPerson).isNull();
+        Person rick = result.get(0);
+        assertThat(rick.getFirstName()).isEqualTo("Rick");
+        List<SportsClub> clubsRick = rick.getSportsClubs();
+        assertThat(clubsRick).hasSize(2);
+        assertThat(clubsRick.get(0).getName()).isEqualTo("CobraKai");
+        assertThat(clubsRick.get(1).getName()).isEqualTo("FC De Treffers");
 
-        Car carNotFound = entityManager.find(Car.class, new CarPK(1, "P-468-LJ"));
-        assertThat(carNotFound).isNull();
+        Person frank = result.get(1);
+        assertThat(frank.getFirstName()).isEqualTo("Frank");
+        List<SportsClub> clubsFrank = frank.getSportsClubs();
+        assertThat(clubsFrank).hasSize(2);
+        assertThat(clubsFrank.get(0).getName()).isEqualTo("CobraKai");
+        assertThat(clubsFrank.get(1).getName()).isEqualTo("FC De Treffers");
     }
 }

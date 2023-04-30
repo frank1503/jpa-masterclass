@@ -2,12 +2,15 @@ package jpa.repository;
 
 import jpa.domain.Person;
 
+import java.util.List;
+
 public interface PersonRepository {
-    Person readPerson(int primaryKey);
 
-    int createPerson(Person person);
+    List<Person> findAllPersons();
 
-    void updatePerson(Person updatedPerson);
+    Person findPersonByFirstName(String firstName);
 
-    void deletePerson(int primaryKey);
+    List<Person> findPersonByCarBrand(String brand);
+
+    List<Person> findPersonsWithSportClub();
 }
