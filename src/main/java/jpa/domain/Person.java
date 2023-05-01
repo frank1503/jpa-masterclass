@@ -25,6 +25,8 @@ public class Person {
     private int age;
 
     //TODO 10a zorg voor een bidirectionele relatie tussen Person en Car waarbij Person de eigenaar is van de relatie
+    // zorg ervoor dat als een Person wordt toegevoegd ook de Car wordt toegevoegd
+    // zelfde als Person wordt verwijderd
 
 
     public Person(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {

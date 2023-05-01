@@ -29,5 +29,6 @@ public class CarRepositoryImpl implements CarRepository {
     @Override
     public void deleteCar(CarPK carPK) {
         //TODO 10e zorg dat Car verwijderd kan worden
+        // de Person moet blijven bestaan in de database
     }
 }

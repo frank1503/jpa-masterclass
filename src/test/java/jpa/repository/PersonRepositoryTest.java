@@ -30,6 +30,10 @@ class PersonRepositoryTest {
     private EntityManager entityManager;
 
     //TODO 10b haal de code uit commentaar en draai de unit test. Deze moeten slagen
+    // doe ook de test draaien met debug (breakpoint regel 48)
+    // welke queries zie je uitgevoerd worden?
+    // haal de Car LAZY op ipv EAGER
+    // welke queries zie je nu?
     @Sql({"/person_setup.sql"})
     @Test
     void shouldCreateAndReadPerson() {
@@ -60,7 +64,7 @@ class PersonRepositoryTest {
         assertThat(createdAddress.getCity()).isEqualTo("Leerdam");
         assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
 
-//        Car createdCar = person.getCar();
+//        Car createdCar = createdPerson.getCar();
 //        assertThat(createdCar.getRegistrationPlate()).isEqualTo("P-468-LJ");
 //        assertThat(createdCar.getSequenceNumber()).isEqualTo(1);
 //        assertThat(createdCar.getBrand()).isEqualTo("Seat");
@@ -94,6 +98,8 @@ class PersonRepositoryTest {
     }
 
     //TODO 10d haal de code uit commentaar en draai de unit test. Deze moeten slagen
+    // Doe hier ook eens via debug de test draaien (breakpoint regel 119)
+    // welke queries doet JPA voor je uitvoeren?
     @Sql({"/person_setup.sql"})
     @Test
     void shouldAlsoDeleteCarWhenSetToNull() {
