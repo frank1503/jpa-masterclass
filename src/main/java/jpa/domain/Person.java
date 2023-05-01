@@ -25,6 +25,7 @@ public class Person {
     private int age;
     @OneToOne(
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+            , fetch = FetchType.EAGER
             , orphanRemoval = true
     )
     private Car car;

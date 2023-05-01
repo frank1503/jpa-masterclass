@@ -61,7 +61,7 @@ class PersonRepositoryTest {
         assertThat(createdAddress.getCity()).isEqualTo("Leerdam");
         assertThat(createdAddress.getCountry()).isEqualTo("Nederland");
 
-        Car createdCar = person.getCar();
+        Car createdCar = createdPerson.getCar();
         assertThat(createdCar.getRegistrationPlate()).isEqualTo("P-468-LJ");
         assertThat(createdCar.getSequenceNumber()).isEqualTo(1);
         assertThat(createdCar.getBrand()).isEqualTo("Seat");
