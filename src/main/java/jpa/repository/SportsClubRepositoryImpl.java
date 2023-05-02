@@ -13,14 +13,9 @@ public class SportsClubRepositoryImpl implements SportsClubRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
+    //TODO 11h implementeer de methode zodat de club wordt opgeslagen
     @Override
-    public int addSportsClub(SportsClub sportsClub) {
-        entityManager.persist(sportsClub);
-        return sportsClub.getId();
-    }
+    public void addSportsClub(SportsClub sportsClub) {
 
-    @Override
-    public SportsClub readSportsClub(int id) {
-        return entityManager.find(SportsClub.class, id);
     }
 }

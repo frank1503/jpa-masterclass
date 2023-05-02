@@ -15,16 +15,15 @@ public class InsuranceRepositoryImpl implements InsuranceRepository {
     @PersistenceContext
     EntityManager entityManager;
 
+    //TODO 11c implementeer de methode zodat een insurance kan worden toegevoegd aan de Person
     @Override
-    public int addInsurance(Insurance insurance) {
-        Person person = entityManager.find(Person.class, insurance.getPerson().getId());
-        person.getInsurances().add(insurance);
+    public void addInsurance(Insurance insurance) {
 
-        return insurance.getId();
     }
 
+    //TODO 11d implementeer de methode zodat je een insurance kan vinden op basis van zijn id
     @Override
     public Insurance readInsurance(int id) {
-        return entityManager.find(Insurance.class, id);
+        return null;
     }
 }

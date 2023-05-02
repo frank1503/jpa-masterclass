@@ -29,25 +29,26 @@ public class SportsClubRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
+    //TODO 11k haal de code uit commentaar en draai de test, deze moet slagen
     @Test
     void shouldAddSportsClub() {
-        SportsClub ajax = new SportsClub("Ajax");
-        Person person1 = createPerson("Dusan", "Tadic");
-        Person person2 = createPerson("Kenneth", "Taylor");
-        person1.addSportsClub(ajax);
-        person2.addSportsClub(ajax);
-
-        sportsClubRepository.addSportsClub(ajax);
-        entityManager.flush();
-        entityManager.clear();
-
-        SportsClub result = entityManager.find(SportsClub.class, ajax.getId());
-        assertThat(result).isNotNull();
-        assertThat(result.getName()).isEqualTo("Ajax");
-        List<Person> members = result.getMembers();
-        assertThat(members).hasSize(2);
-        assertThat(members.get(0).getFirstName()).isEqualTo("Dusan");
-        assertThat(members.get(1).getFirstName()).isEqualTo("Kenneth");
+//        SportsClub ajax = new SportsClub("Ajax");
+//        Person person1 = createPerson("Dusan", "Tadic");
+//        Person person2 = createPerson("Kenneth", "Taylor");
+//        person1.addSportsClub(ajax);
+//        person2.addSportsClub(ajax);
+//
+//        sportsClubRepository.addSportsClub(ajax);
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        SportsClub result = entityManager.find(SportsClub.class, ajax.getId());
+//        assertThat(result).isNotNull();
+//        assertThat(result.getName()).isEqualTo("Ajax");
+//        List<Person> members = result.getMembers();
+//        assertThat(members).hasSize(2);
+//        assertThat(members.get(0).getFirstName()).isEqualTo("Dusan");
+//        assertThat(members.get(1).getFirstName()).isEqualTo("Kenneth");
     }
 
     private Person createPerson(String firstName, String lastName) {

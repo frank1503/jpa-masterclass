@@ -29,18 +29,15 @@ public class Person {
             , orphanRemoval = true
     )
     private Car car;
-    @OneToMany(
-            mappedBy = "person"
-            , cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
-            , fetch = FetchType.EAGER
-            , orphanRemoval = true
-    )
-    private List<Insurance> insurances = new ArrayList<>();
-    @ManyToMany(
-            cascade = CascadeType.PERSIST,
-            fetch = FetchType.EAGER
-    )
-    private List<SportsClub> sportsClubs = new ArrayList<>();
+
+    //TODO 11b voeg hier ook de bidirectionele relatie met Insurance toe
+    // insurances: List<Insurance> OneToMany relatie
+    // Zorg ervoor dat als een Person wordt opgeslagen ook de Insurances worden opgeslagen
+    // Zorg er ook voor dat als een Person wordt verwijderd ook de Insurances worden verwijderd
+
+    //TODO 11f voeg hier ook de bidirectione relatie met SportsClub toe
+    // sportsClubs: List<SportsClub> ManyToMany relatie
+    // Zorg ervoor dat als een Person wordt opgeslagen ook de sportsClubds worden opgeslagen
 
 
     public Person(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
@@ -125,24 +122,9 @@ public class Person {
         this.car = car;
     }
 
-    public List<Insurance> getInsurances() {
-        return insurances;
-    }
-
-    public void setInsurances(List<Insurance> insurances) {
-        this.insurances = insurances;
-    }
-
-    public List<SportsClub> getSportsClubs() {
-        return sportsClubs;
-    }
-
-    public void setSportsClubs(List<SportsClub> sportsClubs) {
-        this.sportsClubs = sportsClubs;
-    }
-
-    public void addSportsClub(SportsClub sportsClub) {
-        sportsClub.getMembers().add(this);
-        this.sportsClubs.add(sportsClub);
-    }
+    //TODO 11g haal deze methode uit commentaar
+//    public void addSportsClub(SportsClub sportsClub) {
+//        sportsClub.getMembers().add(this);
+//        this.sportsClubs.add(sportsClub);
+//    }
 }

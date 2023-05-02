@@ -30,38 +30,41 @@ public class InsuranceRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
+
+    //TODO 11i haal de code uit commentaar en draai de test, deze moet slagen
     @Test
     void shouldAddInsuranceToPerson() {
-        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
-        entityManager.persist(person);
-        entityManager.flush();
-        entityManager.clear();
-
-        Insurance carInsurance = new Insurance("car", new BigDecimal("104.89"));
-        carInsurance.setPerson(person);
-        insuranceRepository.addInsurance(carInsurance);
-        entityManager.flush();
-        entityManager.clear();
-
-        Person createdPerson = entityManager.find(Person.class, person.getId());
-        assertThat(createdPerson.getInsurances()).hasSize(1);
+//        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+//        entityManager.persist(person);
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        Insurance carInsurance = new Insurance("car", new BigDecimal("104.89"));
+//        carInsurance.setPerson(person);
+//        insuranceRepository.addInsurance(carInsurance);
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        Person createdPerson = entityManager.find(Person.class, person.getId());
+        //assertThat(createdPerson.getInsurances()).hasSize(1);
     }
 
+    //TODO 11j haal de code uit commentaar draai de test, deze moet slagen
     @Test
     void shouldReadInsurance() {
-        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
-        entityManager.persist(person);
-        entityManager.flush();
-        entityManager.clear();
-
-        Insurance carInsurance = new Insurance("car", new BigDecimal("104.89"));
-        carInsurance.setPerson(person);
-        entityManager.persist(carInsurance);
-        entityManager.flush();
-        entityManager.clear();
-
-        Insurance createdInsurance = insuranceRepository.readInsurance(carInsurance.getId());
-        assertThat(createdInsurance).isNotNull();
-        assertThat(createdInsurance.getPerson().getFirstName()).isEqualTo("Rick");
+//        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+//        entityManager.persist(person);
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        Insurance carInsurance = new Insurance("car", new BigDecimal("104.89"));
+//        carInsurance.setPerson(person);
+//        entityManager.persist(carInsurance);
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        Insurance createdInsurance = insuranceRepository.readInsurance(carInsurance.getId());
+//        assertThat(createdInsurance).isNotNull();
+//        assertThat(createdInsurance.getPerson().getFirstName()).isEqualTo("Rick");
     }
 }

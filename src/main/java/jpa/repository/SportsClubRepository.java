@@ -4,7 +4,6 @@ import jpa.domain.SportsClub;
 
 public interface SportsClubRepository {
 
-    int addSportsClub(SportsClub sportsClub);
+    void addSportsClub(SportsClub sportsClub);
 
-    SportsClub readSportsClub(int id);
 }
