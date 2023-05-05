@@ -4,31 +4,31 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class CarPK implements Serializable {
-    private int serialNumber;
-    private String type;
+    private int sequenceNumber;
+    private String registrationPlate;
 
     public CarPK() {
     }
 
-    public CarPK(int serialNumber, String type) {
-        this.serialNumber = serialNumber;
-        this.type = type;
+    public CarPK(int sequenceNumber, String registrationPlate) {
+        this.sequenceNumber = sequenceNumber;
+        this.registrationPlate = registrationPlate;
     }
 
-    public int getSerialNumber() {
-        return serialNumber;
+    public int getSequenceNumber() {
+        return sequenceNumber;
     }
 
-    public void setSerialNumber(int serialNumber) {
-        this.serialNumber = serialNumber;
+    public void setSequenceNumber(int sequenceNumber) {
+        this.sequenceNumber = sequenceNumber;
     }
 
-    public String getType() {
-        return type;
+    public String getRegistrationPlate() {
+        return registrationPlate;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRegistrationPlate(String registrationPlate) {
+        this.registrationPlate = registrationPlate;
     }
 
     @Override
@@ -36,11 +36,11 @@ public class CarPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CarPK carPK = (CarPK) o;
-        return serialNumber == carPK.serialNumber && Objects.equals(type, carPK.type);
+        return sequenceNumber == carPK.sequenceNumber && registrationPlate.equals(carPK.registrationPlate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(serialNumber, type);
+        return Objects.hash(sequenceNumber, registrationPlate);
     }
 }

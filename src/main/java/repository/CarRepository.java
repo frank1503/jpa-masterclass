@@ -36,7 +36,7 @@ public class CarRepository {
         em.close();
         emf.close();
 
-        return new CarPK(car.getSequenceNumber(), car.getBrand());
+        return new CarPK(car.getSequenceNumber(), car.getRegistrationPlate());
     }
 
     public void deleteCar(CarPK carPK) {

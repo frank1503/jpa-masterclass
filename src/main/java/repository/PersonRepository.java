@@ -24,7 +24,7 @@ public class PersonRepository {
     }
 
     public int createPerson(Person person) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass-none");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-masterclass-create");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
