@@ -7,7 +7,8 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO 12: Zorg daarna dat alle entities juist geconfigureerd worden en draai de unit testen. Deze moeten slagen
+//TODO 12: Draai eerst db_setup.sql.
+// Zorg daarna dat alle entities juist geconfigureerd worden en draai de unit testen. Deze moeten slagen
 
 @Entity
 public class Person {
