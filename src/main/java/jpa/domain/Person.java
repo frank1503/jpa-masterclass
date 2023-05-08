@@ -145,4 +145,9 @@ public class Person {
         sportsClub.getMembers().add(this);
         this.sportsClubs.add(sportsClub);
     }
+
+    public void addInsurance(Insurance insurance) {
+        this.insurances.add(insurance);
+        insurance.setPerson(this);
+    }
 }

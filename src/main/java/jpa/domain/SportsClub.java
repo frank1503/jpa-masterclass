@@ -13,7 +13,7 @@ public class SportsClub {
 
     private String name;
 
-    @ManyToMany(mappedBy = "sportsClubs", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "sportsClubs")
     private List<Person> members = new ArrayList<>();
 
     public SportsClub() {

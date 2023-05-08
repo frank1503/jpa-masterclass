@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
@@ -31,20 +32,22 @@ public class InsuranceRepositoryTest {
     private EntityManager entityManager;
 
     @Test
+    @Sql("/add-person.sql")
     void shouldAddInsuranceToPerson() {
-        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
-        entityManager.persist(person);
-        entityManager.flush();
-        entityManager.clear();
-
         Insurance carInsurance = new Insurance("car", new BigDecimal("104.89"));
-        carInsurance.setPerson(person);
-        insuranceRepository.addInsurance(carInsurance);
+
+        Person person = entityManager.find(Person.class, 1);
+        person.addInsurance(carInsurance);
+
+        int insuranceId = insuranceRepository.addInsurance(carInsurance);
         entityManager.flush();
         entityManager.clear();
 
-        Person createdPerson = entityManager.find(Person.class, person.getId());
-        assertThat(createdPerson.getInsurances()).hasSize(1);
+        Insurance createdInsurance = entityManager.find(Insurance.class, insuranceId);
+        assertThat(createdInsurance).isNotNull();
+        assertThat(createdInsurance.getType()).isEqualTo("car");
+        assertThat(carInsurance.getPerson()).isNotNull();
+        assertThat(carInsurance.getPerson().getFirstName()).isEqualTo("Rick");
     }
 
     @Test

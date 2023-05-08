@@ -16,9 +16,9 @@ public class InsuranceRepositoryImpl implements InsuranceRepository {
     EntityManager entityManager;
 
     @Override
-    public void addInsurance(Insurance insurance) {
-        Person person = entityManager.find(Person.class, insurance.getPerson().getId());
-        person.getInsurances().add(insurance);
+    public int addInsurance(Insurance insurance) {
+        entityManager.persist(insurance);
+        return insurance.getId();
     }
 
     @Override

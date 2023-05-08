@@ -14,7 +14,8 @@ public class SportsClubRepositoryImpl implements SportsClubRepository {
     private EntityManager entityManager;
 
     @Override
-    public void addSportsClub(SportsClub sportsClub) {
+    public int addSportsClub(SportsClub sportsClub) {
         entityManager.persist(sportsClub);
+        return sportsClub.getId();
     }
 }
