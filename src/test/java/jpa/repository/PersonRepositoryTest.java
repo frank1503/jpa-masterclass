@@ -19,7 +19,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-//TODO 9b draai de unit tests. Deze moeten slagen
+//TODO 9b Voer eerst setup.sql uit draai de unit tests. Deze moeten slagen
 @ExtendWith(SpringExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @SpringBootTest(classes = JpaApplication.class)
