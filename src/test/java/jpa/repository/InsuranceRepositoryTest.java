@@ -55,19 +55,9 @@ public class InsuranceRepositoryTest {
 
     //TODO 11j haal de code uit commentaar draai de test, deze moet slagen
     @Test
+    @Sql("/add-person-with-insurance.sql")
     void shouldReadInsurance() {
-//        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
-//        entityManager.persist(person);
-//        entityManager.flush();
-//        entityManager.clear();
-//
-//        Insurance carInsurance = new Insurance("car", new BigDecimal("104.89"));
-//        carInsurance.setPerson(person);
-//        entityManager.persist(carInsurance);
-//        entityManager.flush();
-//        entityManager.clear();
-//
-//        Insurance createdInsurance = insuranceRepository.readInsurance(carInsurance.getId());
+//        Insurance createdInsurance = insuranceRepository.readInsurance(1);
 //        assertThat(createdInsurance).isNotNull();
 //        assertThat(createdInsurance.getPerson().getFirstName()).isEqualTo("Rick");
     }
