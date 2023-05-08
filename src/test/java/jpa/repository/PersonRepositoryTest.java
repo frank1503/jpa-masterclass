@@ -30,6 +30,7 @@ class PersonRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
+    //TODO 13b draai de test
     @Test
     void shouldReadPersons() {
         List<Person> result = personRepository.findAllPersons();
@@ -42,12 +43,14 @@ class PersonRepositoryTest {
         assertThat(rick.getFirstName()).isEqualTo("Rick");
     }
 
+    //TODO 13d draai de test
     @Test
     void shouldFindPersonByFirstName() {
         Person frank = personRepository.findPersonByFirstName("Frank");
         assertThat(frank.getFirstName()).isEqualTo("Frank");
     }
 
+    //TODO 13f draai de test
     @Test
     void shouldFindPersonByCarBrand() {
         List<Person> result = personRepository.findPersonByCarBrand("Seat");
@@ -59,8 +62,9 @@ class PersonRepositoryTest {
         assertThat(seat.getBrand()).isEqualTo("Seat");
     }
 
+    //TODO 13h draai de test
     @Test
-    void shouldFindPersonsBySportClub() {
+    void shouldFindPersonsWithSportClub() {
         List<Person> result = personRepository.findPersonsWithSportClub();
         assertThat(result).hasSize(2);
 

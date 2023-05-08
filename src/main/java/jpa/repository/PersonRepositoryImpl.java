@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import jpa.domain.Person;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -16,34 +17,33 @@ public class PersonRepositoryImpl implements PersonRepository {
     @PersistenceContext
     EntityManager entityManager;
 
-
+    //TODO 13a draai eerst db_setup.sql
+    // Maak een TypedQuery die alle personen ophaalt. Gebruik JPQL
     @Override
     public List<Person> findAllPersons() {
-        TypedQuery<Person> typedQuery = entityManager.createQuery("select p from Person p", Person.class);
-        return typedQuery.getResultList();
+        return Collections.emptyList();
     }
 
+    //TODO 13c maak een named query die een Person ophaalt op basis van de voornaam. Gebruik JPQL
     @Override
     public Person findPersonByFirstName(String firstName) {
-        TypedQuery<Person> namedQuery = entityManager.createNamedQuery(Person.FIND_BY_FIRST_NAME, Person.class);
-        namedQuery.setParameter("firstName", firstName);
-        return namedQuery.getSingleResult();
+
+        return null;
     }
 
+    //TODO 13e maak een TypedQuery die personen ophaalt op basis van de brand van de Car Gebruik JPQL
     @Override
     public List<Person> findPersonByCarBrand(String brand) {
-        TypedQuery<Person> typedQuery = entityManager.createQuery(
-                "select p from Person p where p.car.brand = :brand", Person.class
-        );
-        typedQuery.setParameter("brand", brand);
-        return typedQuery.getResultList();
+
+        return Collections.emptyList();
     }
 
+    //TODO 13g Maak een TypedQuery die personen en bijbehorende sportsclubs ophaalt
+    // De relatie SportsClubs worden lazy geladen maar zorg ervoor deze toch direct geladen worden bij het ophalen van Person
+    // Gebruik JPQL
     @Override
     public List<Person> findPersonsWithSportClub() {
-        TypedQuery<Person> typedQuery = entityManager.createQuery(
-                "select p from Person p join fetch p.sportsClubs s order by p.firstName desc", Person.class
-        );
-        return typedQuery.getResultList();
+
+        return Collections.emptyList();
     }
 }

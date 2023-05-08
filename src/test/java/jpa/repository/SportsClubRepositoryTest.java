@@ -25,6 +25,7 @@ public class SportsClubRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
+    //TODO 13l draai de test
     @Test
     void shouldFindSportsClubByName() {
         SportsClub cobraKai = sportsClubRepository.findSportsClubByName("CobraKai");

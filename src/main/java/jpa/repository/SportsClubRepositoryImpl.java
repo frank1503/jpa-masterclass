@@ -14,6 +14,7 @@ public class SportsClubRepositoryImpl implements SportsClubRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
+    //TODO 13k maak een query die een sportsClub op naam opzoekt. Gebruik een Native query
     @Override
     public SportsClub findSportsClubByName(String name) {
         Query query = entityManager.createNativeQuery(

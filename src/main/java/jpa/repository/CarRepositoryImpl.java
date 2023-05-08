@@ -21,18 +21,10 @@ public class CarRepositoryImpl implements CarRepository {
     @PersistenceContext
     EntityManager entityManager;
 
+    //TODO 13i Haal een Car op op basis van brand en color. Gebruik de Criteria API
     @Override
     public Car findCarByBrandAndColor(String brand, String color) {
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Car> criteriaQuery = builder.createQuery(Car.class);
-        Root<Car> c = criteriaQuery.from(Car.class);
 
-        List<Predicate> predicates = new ArrayList<>();
-        predicates.add(builder.equal(c.get("brand"), brand));
-        predicates.add(builder.equal(c.get("color"), color));
-        criteriaQuery.where(predicates.toArray(new Predicate[0]));
-
-        TypedQuery<Car> query = entityManager.createQuery(criteriaQuery);
-        return query.getSingleResult();
+        return null;
     }
 }

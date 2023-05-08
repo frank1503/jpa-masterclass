@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NamedQuery(name = Person.FIND_BY_FIRST_NAME, query = "select p from Person p where p.firstName = :firstName")
 public class Person {
     public static final String FIND_BY_FIRST_NAME = "findByFirstName";
 

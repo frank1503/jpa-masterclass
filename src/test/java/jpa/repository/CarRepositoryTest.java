@@ -25,6 +25,7 @@ public class CarRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
+    //TODO 13j draai de test
     @Test
     void shouldFindCarByBrandAndColor() {
         Car car = carRepository.findCarByBrandAndColor("Ford", "Green");
