@@ -1,6 +1,5 @@
 package jpa.domain;
 
-import domain.AuditTrailerListener;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
