@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 public class Person {
-    public static final String FIND_BY_FIRST_NAME = "findByFirstName";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
