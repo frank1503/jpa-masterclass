@@ -16,7 +16,9 @@ public class SportsClubRepositoryImpl implements SportsClubRepository {
 
     @Override
     public SportsClub findSportsClubByName(String name) {
-        Query query = entityManager.createNativeQuery("select * from sportsclub s where s.name = :name", SportsClub.class);
+        Query query = entityManager.createNativeQuery(
+                "select * from sportsclub s where s.name = :name", SportsClub.class
+        );
         query.setParameter("name", name);
         return (SportsClub) query.getSingleResult();
     }

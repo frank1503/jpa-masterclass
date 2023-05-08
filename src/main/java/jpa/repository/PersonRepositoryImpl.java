@@ -32,14 +32,18 @@ public class PersonRepositoryImpl implements PersonRepository {
 
     @Override
     public List<Person> findPersonByCarBrand(String brand) {
-        TypedQuery<Person> typedQuery = entityManager.createQuery("select p from Person p where p.car.brand = :brand", Person.class);
+        TypedQuery<Person> typedQuery = entityManager.createQuery(
+                "select p from Person p where p.car.brand = :brand", Person.class
+        );
         typedQuery.setParameter("brand", brand);
         return typedQuery.getResultList();
     }
 
     @Override
     public List<Person> findPersonsWithSportClub() {
-        TypedQuery<Person> typedQuery = entityManager.createQuery("select p from Person p join fetch p.sportsClubs s óóorder by p.firstName desc", Person.class);
+        TypedQuery<Person> typedQuery = entityManager.createQuery(
+                "select p from Person p join fetch p.sportsClubs s order by p.firstName desc", Person.class
+        );
         return typedQuery.getResultList();
     }
 }
