@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jpa.JpaApplication;
 import jpa.domain.Car;
 import jpa.domain.CarPK;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class CarRepositoryTest {
     private EntityManager entityManager;
 
     @Test
+    @Disabled
     void shouldCreateReadAndDeleteCar() {
         Car car = new Car(123, "Seat", "Blue", "P-468-LJ");
         CarPK carPK = carRepository.createCar(car);
@@ -44,6 +46,46 @@ public class CarRepositoryTest {
         entityManager.clear();
 
         Car deletedCar = carRepository.readCar(carPK);
+        assertThat(deletedCar).isNull();
+    }
+
+    @Test
+    void shouldReadCar() {
+        Car car = new Car(123, "Seat", "Blue", "P-468-LJ");
+        entityManager.persist(car);
+        entityManager.flush();
+        entityManager.clear();
+
+        Car foundCar = carRepository.readCar(new CarPK(car.getSequenceNumber(), car.getRegistrationPlate()));
+        assertThat(foundCar).isNotNull();
+        assertThat(foundCar). usingRecursiveComparison().isEqualTo(car);
+    }
+
+    @Test
+    void shouldCreateCar() {
+        Car car = new Car(123, "Seat", "Blue", "P-468-LJ");
+        CarPK carPK = carRepository.createCar(car);
+        entityManager.flush();
+        entityManager.clear();
+
+        Car createdCar = entityManager.find(Car.class, carPK);
+        assertThat(createdCar).isNotNull();
+        assertThat(createdCar). usingRecursiveComparison().isEqualTo(car);
+    }
+
+    @Test
+    void shouldDeleteCar() {
+        Car car = new Car(123, "Seat", "Blue", "P-468-LJ");
+        entityManager.persist(car);
+        entityManager.flush();
+        entityManager.clear();
+
+        CarPK carPK = new CarPK(car.getSequenceNumber(), car.getRegistrationPlate());
+        carRepository.deleteCar(carPK);
+        entityManager.flush();
+        entityManager.clear();
+
+        Car deletedCar = entityManager.find(Car.class, carPK);
         assertThat(deletedCar).isNull();
     }
 }
