@@ -15,7 +15,8 @@ public class SportsClubRepositoryImpl implements SportsClubRepository {
 
     //TODO 11h implementeer de methode zodat de club wordt opgeslagen
     @Override
-    public void addSportsClub(SportsClub sportsClub) {
-
+    public int addSportsClub(SportsClub sportsClub) {
+        //return id van sportsClub ipv 0
+        return 0;
     }
 }

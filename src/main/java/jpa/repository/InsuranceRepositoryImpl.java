@@ -17,8 +17,9 @@ public class InsuranceRepositoryImpl implements InsuranceRepository {
 
     //TODO 11c implementeer de methode zodat een insurance kan worden toegevoegd aan de Person
     @Override
-    public void addInsurance(Insurance insurance) {
-
+    public int addInsurance(Insurance insurance) {
+        //return id van insurance ipv 0
+        return 0;
     }
 
     //TODO 11d implementeer de methode zodat je een insurance kan vinden op basis van zijn id

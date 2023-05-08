@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
@@ -31,31 +32,23 @@ public class SportsClubRepositoryTest {
 
     //TODO 11k haal de code uit commentaar en draai de test, deze moet slagen
     @Test
+    @Sql("/add-person.sql")
     void shouldAddSportsClub() {
-//        SportsClub ajax = new SportsClub("Ajax");
-//        Person person1 = createPerson("Dusan", "Tadic");
-//        Person person2 = createPerson("Kenneth", "Taylor");
-//        person1.addSportsClub(ajax);
-//        person2.addSportsClub(ajax);
+//        SportsClub sportsClub = new SportsClub("FC De Treffers");
 //
-//        sportsClubRepository.addSportsClub(ajax);
+//        Person person = entityManager.find(Person.class, 1);
+//        person.addSportsClub(sportsClub);
+//
+//        int sportsClubId = sportsClubRepository.addSportsClub(sportsClub);
 //        entityManager.flush();
 //        entityManager.clear();
 //
-//        SportsClub result = entityManager.find(SportsClub.class, ajax.getId());
-//        assertThat(result).isNotNull();
-//        assertThat(result.getName()).isEqualTo("Ajax");
-//        List<Person> members = result.getMembers();
-//        assertThat(members).hasSize(2);
-//        assertThat(members.get(0).getFirstName()).isEqualTo("Dusan");
-//        assertThat(members.get(1).getFirstName()).isEqualTo("Kenneth");
-    }
-
-    private Person createPerson(String firstName, String lastName) {
-        Person person = new Person();
-        person.setFirstName(firstName);
-        person.setLastName(lastName);
-        person.setDateOfBirth(LocalDate.parse("1980-01-01"));
-        return person;
+//        SportsClub createdSportsClub = entityManager.find(SportsClub.class, sportsClubId);
+//        assertThat(createdSportsClub).isNotNull();
+//        assertThat(createdSportsClub.getName()).isEqualTo("FC De Treffers");
+//
+//        List<Person> members = createdSportsClub.getMembers();
+//        assertThat(members).hasSize(1);
+//        assertThat(members.get(0).getFirstName()).isEqualTo("Rick");
     }
 }

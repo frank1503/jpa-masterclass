@@ -40,13 +40,16 @@ class PersonRepositoryTest {
 //        Car car = new Car(1, "P-468-LJ", "Seat", "Blue");
 //        Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
 //        Person person = new Person("Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+//
 //        person.setAddress(address);
 //        person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
 //        person.setCar(car);
+//
 //        car.setPerson(person);
-//        carInsurance.setPerson(person);
-//        houseInsurance.setPerson(person);
-//        //person.setInsurances(List.of(carInsurance, houseInsurance));
+//
+//        person.addInsurance(carInsurance);
+//        person.addInsurance(houseInsurance);
+//
 //        person.addSportsClub(soccerClub);
 //        person.addSportsClub(tennisClub);
 //

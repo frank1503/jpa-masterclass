@@ -8,8 +8,7 @@ import java.util.List;
 //TODO 11e maak de SportsClub entity af
 // id: int (PK) genereer met de IDENTITY strategy
 // name: String
-// members: List<Person> bidirectionele ManyToMany waarbij Person de eigenaar is van de relatie.
-// zorg er ook voor dat als de club wordt opgeslagen ook de members worden opgeslagen
+// members: List<Person> bidirectionele relatie waarbij Person de eigenaar is van de relatie.
 // maak ook de volgende constructor SportsClub(String name)
 
 public class SportsClub {

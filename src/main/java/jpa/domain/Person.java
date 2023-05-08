@@ -31,13 +31,11 @@ public class Person {
     private Car car;
 
     //TODO 11b voeg hier ook de bidirectionele relatie met Insurance toe
-    // insurances: List<Insurance> OneToMany relatie
-    // Zorg ervoor dat als een Person wordt opgeslagen ook de Insurances worden opgeslagen
-    // Zorg er ook voor dat als een Person wordt verwijderd ook de Insurances worden verwijderd
+    // insurances: List<Insurance>
+
 
     //TODO 11f voeg hier ook de bidirectione relatie met SportsClub toe
-    // sportsClubs: List<SportsClub> ManyToMany relatie
-    // Zorg ervoor dat als een Person wordt opgeslagen ook de sportsClubds worden opgeslagen
+    // sportsClubs: List<SportsClub>
 
 
     public Person(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
@@ -52,7 +50,8 @@ public class Person {
         this.age = Period.between(this.dateOfBirth, LocalDate.now()).getYears();
     }
 
-    public Person() {}
+    public Person() {
+    }
 
     public int getId() {
         return id;
@@ -122,9 +121,14 @@ public class Person {
         this.car = car;
     }
 
-    //TODO 11g haal deze methode uit commentaar
+    //TODO 11g haal deze 2 methoden uit commentaar
 //    public void addSportsClub(SportsClub sportsClub) {
 //        sportsClub.getMembers().add(this);
 //        this.sportsClubs.add(sportsClub);
+//    }
+//
+//    public void addInsurance(Insurance insurance) {
+//        this.insurances.add(insurance);
+//        insurance.setPerson(this);
 //    }
 }
