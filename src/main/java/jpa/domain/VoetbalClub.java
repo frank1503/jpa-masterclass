@@ -10,9 +10,14 @@ import java.util.List;
 @NamedQuery(
         name = VoetbalClub.VOETBAL_CLUB_OP_NAAM,
         query = "select v from VoetbalClub v where v.naam = :naam")
+@NamedEntityGraph(
+        name = VoetbalClub.VOETBAL_CLUB_EN_SPELERS,
+        attributeNodes = @NamedAttributeNode("spelers")
+)
 public class VoetbalClub {
 
     public static final String VOETBAL_CLUB_OP_NAAM = "voetbalClubOpNaam";
+    public static final String VOETBAL_CLUB_EN_SPELERS = "voetbalClubEnSpelers";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +35,7 @@ public class VoetbalClub {
     @ElementCollection
     @CollectionTable(name = "CLUB_SPONSOREN", joinColumns = @JoinColumn(name = "CLUB_ID"))
     @Column(name = "SPONSOR")
-    private List<String> sponsoren;
+    private List<String> sponsoren = new ArrayList<>();
 
     @OneToOne(
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
@@ -48,9 +53,7 @@ public class VoetbalClub {
     )
     private List<Speler> spelers = new ArrayList<>();
 
-    @ManyToMany(
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
-    )
+    @ManyToMany
     @JoinTable(
             name = "club_competitie"
             , joinColumns = @JoinColumn(name = "club_id")
@@ -111,5 +114,10 @@ public class VoetbalClub {
 
     public void setCompetities(List<Competitie> competities) {
         this.competities = competities;
+    }
+
+    public void addSpeler(Speler speler) {
+        spelers.add(speler);
+        speler.setVoetbalClub(this);
     }
 }

@@ -1,10 +1,5 @@
 package jpa.rest.views;
 
-import jpa.domain.VoetbalClub;
-import jpa.rest.views.mappers.CompetitieMapper;
-import jpa.rest.views.mappers.SpelerMapper;
-import jpa.rest.views.mappers.StadionMapper;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,21 +14,11 @@ public class VoetbalClubView {
     private final List<SpelerView> spelersView = new ArrayList<>();
     private final List<CompetitieView> competitiesView = new ArrayList<>();
 
-    public VoetbalClubView(VoetbalClub voetbalClub) {
-        this.id = voetbalClub.getId();
-        this.naam = voetbalClub.getNaam();
-        this.land = voetbalClub.getLocatie().getLand();
-        this.stad = voetbalClub.getLocatie().getStad();
-
-        this.sponsoren.addAll(voetbalClub.getSponsoren());
-
-        if (voetbalClub.getStadion() != null) {
-            this.stadionView = StadionMapper.mapToStadionView(voetbalClub.getStadion());
-        }
-
-        this.spelersView.addAll(SpelerMapper.mapToSpelersView(voetbalClub.getSpelers()));
-
-        this.competitiesView.addAll(CompetitieMapper.mapToCompetitiesView(voetbalClub.getCompetities()));
+    public VoetbalClubView(int id, String naam, String land, String stad) {
+        this.id = id;
+        this.naam = naam;
+        this.land = land;
+        this.stad = stad;
     }
 
     public int getId() {
@@ -58,6 +43,10 @@ public class VoetbalClubView {
 
     public StadionView getStadionView() {
         return stadionView;
+    }
+
+    public void setStadionView(StadionView stadionView) {
+        this.stadionView = stadionView;
     }
 
     public List<SpelerView> getSpelersView() {
