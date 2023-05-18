@@ -2,6 +2,7 @@ package jpa.domain;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ public class Competitie {
     private String naam;
 
     @ManyToMany(mappedBy = "competities")
-    private List<VoetbalClub> voetbalClubs;
+    private List<VoetbalClub> voetbalClubs = new ArrayList<>();
 
     public Competitie() {
     }

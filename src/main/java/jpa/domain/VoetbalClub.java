@@ -7,7 +7,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "X_VOETBAL_CLUB")
+@NamedQuery(
+        name = VoetbalClub.VOETBAL_CLUB_OP_NAAM,
+        query = "select v from VoetbalClub v where v.naam = :naam")
 public class VoetbalClub {
+
+    public static final String VOETBAL_CLUB_OP_NAAM = "voetbalClubOpNaam";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +42,7 @@ public class VoetbalClub {
 
     @OneToMany(
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY,
             orphanRemoval = true,
             mappedBy = "voetbalClub"
     )
@@ -51,6 +57,9 @@ public class VoetbalClub {
             , inverseJoinColumns = @JoinColumn(name = "competitie_id")
     )
     private List<Competitie> competities = new ArrayList<>();
+
+    public VoetbalClub() {
+    }
 
     public int getId() {
         return id;
