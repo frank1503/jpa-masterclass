@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "849ef672-f71b-4c40-89dd-ac3275d19656",
+		"name": "final-opdracht",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "VindVoetbalClubOpId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/voetbalclubs/996",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"voetbalclubs",
+						"996"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VindVoetbalClubOpNaam",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/voetbalclubs?naam=AZ",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"voetbalclubs"
+					],
+					"query": [
+						{
+							"key": "naam",
+							"value": "AZ"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SlaVoetbalClubOpUitgebreid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"naam\": \"AZ\",\r\n    \"land\": \"Nederland\",\r\n    \"stad\": \"Alkmaar\",\r\n    \"sponsoren\": [\r\n        \"Kansino\",\r\n        \"Nike\"\r\n    ],\r\n    \"stadion\": {\r\n        \"naam\": \"AFAS Stadion\",\r\n        \"capaciteit\": 19500\r\n    },\r\n    \"spelers\": [\r\n        {\r\n        \"naam\": \"Mathew Ryan\",\r\n        \"rugNummer\": 1,\r\n        \"geboorteDatum\": \"1992-04-08\"\r\n        },\r\n        {\r\n        \"naam\": \"Maxim Dekker\",\r\n        \"rugNummer\": 22,\r\n        \"geboorteDatum\": \"2004-04-21\"\r\n        },\r\n        {\r\n        \"naam\": \"Jordy Clasie\",\r\n        \"rugNummer\": 8,\r\n        \"geboorteDatum\": \"1991-06-27\"\r\n        }\r\n        ,\r\n        {\r\n        \"naam\": \"Jens Odgaard\",\r\n        \"rugNummer\": 7,\r\n        \"geboorteDatum\": \"1999-03-31\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/voetbalclubs",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"voetbalclubs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VerwijderVoetbalClub",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/voetbalclubs?naam=AZ",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"voetbalclubs"
+					],
+					"query": [
+						{
+							"key": "naam",
+							"value": "AZ"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SlaVoetbalClubOpSimpel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"naam\": \"AZ\",\r\n    \"land\": \"Nederland\",\r\n    \"stad\": \"Alkmaar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/voetbalclubs",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"voetbalclubs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VindVoetbaMetSpelers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/voetbalclubs/996/spelers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"voetbalclubs",
+						"996",
+						"spelers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
