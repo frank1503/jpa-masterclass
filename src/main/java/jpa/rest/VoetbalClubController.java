@@ -1,9 +1,9 @@
 package jpa.rest;
 
-import jpa.domain.Locatie;
 import jpa.domain.VoetbalClub;
 import jpa.repository.VoetbalClubRepositroy;
 import jpa.rest.commands.VoetbalClubCommand;
+import jpa.rest.views.mappers.VoetbalClubMapper;
 import jpa.rest.views.VoetbalClubView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,32 +28,19 @@ public class VoetbalClubController {
     public ResponseEntity<VoetbalClubView> vindOpId(@PathVariable("id") int id) {
         VoetbalClub voetbalClub = voetbalClubRepositroy.vindVoetbalClubOpId(id);
 
-        return new ResponseEntity<>(mapToVoetbalClubView(voetbalClub), HttpStatus.OK);
+        return new ResponseEntity<>(VoetbalClubMapper.mapToVoetbalClubView(voetbalClub), HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<VoetbalClubView> vindOpNaam(@RequestParam String naam) {
         Optional<VoetbalClub> voetbalClub = voetbalClubRepositroy.zoekVoetbalClubOpNaam(naam);
 
-        return voetbalClub.map(club -> new ResponseEntity<>(mapToVoetbalClubView(club), HttpStatus.OK))
+        return voetbalClub.map(club -> new ResponseEntity<>(VoetbalClubMapper.mapToVoetbalClubView(club), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
     public void slaOp(@RequestBody VoetbalClubCommand voetbalClubCommand) {
-        voetbalClubRepositroy.slaVoetbalClubOp(mapToVoetbalClub(voetbalClubCommand));
-    }
-
-    private VoetbalClubView mapToVoetbalClubView(VoetbalClub voetbalClub) {
-        return new VoetbalClubView(voetbalClub);
-    }
-
-    private VoetbalClub mapToVoetbalClub(VoetbalClubCommand voetbalClubCommand) {
-        VoetbalClub voetbalClub = new VoetbalClub();
-
-        voetbalClub.setNaam(voetbalClubCommand.getNaam());
-        voetbalClub.setLocatie(new Locatie(voetbalClubCommand.getLand(), voetbalClubCommand.getStad()));
-
-        return voetbalClub;
+        voetbalClubRepositroy.slaVoetbalClubOp(voetbalClubCommand.mapToVoetbalClub());
     }
 }

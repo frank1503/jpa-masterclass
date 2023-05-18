@@ -1,9 +1,9 @@
 package jpa.rest.views;
 
-import jpa.domain.Competitie;
-import jpa.domain.Speler;
-import jpa.domain.Stadion;
 import jpa.domain.VoetbalClub;
+import jpa.rest.views.mappers.CompetitieMapper;
+import jpa.rest.views.mappers.SpelerMapper;
+import jpa.rest.views.mappers.StadionMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +28,12 @@ public class VoetbalClubView {
         this.sponsoren.addAll(voetbalClub.getSponsoren());
 
         if (voetbalClub.getStadion() != null) {
-            this.stadionView = mapToStadionView(voetbalClub.getStadion());
+            this.stadionView = StadionMapper.mapToStadionView(voetbalClub.getStadion());
         }
 
-        this.spelersView.addAll(mapToSpelersView(voetbalClub.getSpelers()));
+        this.spelersView.addAll(SpelerMapper.mapToSpelersView(voetbalClub.getSpelers()));
 
-        this.competitiesView.addAll(mapToCompetitiesView(voetbalClub.getCompetities()));
+        this.competitiesView.addAll(CompetitieMapper.mapToCompetitiesView(voetbalClub.getCompetities()));
     }
 
     public int getId() {
@@ -66,45 +66,5 @@ public class VoetbalClubView {
 
     public List<CompetitieView> getCompetitiesView() {
         return competitiesView;
-    }
-
-    private StadionView mapToStadionView(Stadion stadion) {
-        return new StadionView(
-                stadion.getId(),
-                stadion.getNaam(),
-                stadion.getCapaciteit()
-        );
-    }
-
-    private List<SpelerView> mapToSpelersView(List<Speler> spelers) {
-        List<SpelerView> spelersView = new ArrayList<>();
-
-        spelers.forEach(s -> spelersView.add(mapToSpelerView(s)));
-
-        return spelersView;
-    }
-
-    private SpelerView mapToSpelerView(Speler speler) {
-        return new SpelerView(
-                speler.getNaam(),
-                speler.getRugNummer(),
-                speler.getGeboorteDatum(),
-                speler.getLeeftijd()
-        );
-    }
-
-    private List<CompetitieView> mapToCompetitiesView(List<Competitie> competities) {
-        List<CompetitieView> competitiesView = new ArrayList<>();
-
-        competities.forEach(c -> competitiesView.add(mapToCompetitieView(c)));
-
-        return competitiesView;
-    }
-
-    private CompetitieView mapToCompetitieView(Competitie competitie) {
-        return new CompetitieView(
-                competitie.getId(),
-                competitie.getNaam()
-        );
     }
 }
