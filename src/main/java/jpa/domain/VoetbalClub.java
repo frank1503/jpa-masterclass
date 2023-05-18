@@ -6,18 +6,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "X_VOETBAL_CLUB")
 public class VoetbalClub {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CLUB_ID")
     private int id;
 
+    @Column(name = "CLUB_NAAM")
     private String naam;
 
     @Embedded
+    @AttributeOverride(name = "land", column = @Column(name = "CLUB_LAND"))
+    @AttributeOverride(name = "stad", column = @Column(name = "CLUB_STAD"))
     private Locatie locatie;
 
     @ElementCollection
+    @CollectionTable(name = "CLUB_SPONSOREN", joinColumns = @JoinColumn(name = "CLUB_ID"))
+    @Column(name = "SPONSOR")
     private List<String> sponsoren;
 
     @OneToOne(
@@ -25,12 +32,13 @@ public class VoetbalClub {
             fetch = FetchType.LAZY,
             orphanRemoval = true
     )
+    @JoinColumn(name = "STDN_ID", referencedColumnName = "STADION_ID")
     private Stadion stadion;
 
     @OneToMany(
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             orphanRemoval = true,
-            mappedBy = "stadion"
+            mappedBy = "voetbalClub"
     )
     private List<Speler> spelers = new ArrayList<>();
 
@@ -43,4 +51,56 @@ public class VoetbalClub {
             , inverseJoinColumns = @JoinColumn(name = "competitie_id")
     )
     private List<Competitie> competities = new ArrayList<>();
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public Locatie getLocatie() {
+        return locatie;
+    }
+
+    public void setLocatie(Locatie locatie) {
+        this.locatie = locatie;
+    }
+
+    public List<String> getSponsoren() {
+        return sponsoren;
+    }
+
+    public void setSponsoren(List<String> sponsoren) {
+        this.sponsoren = sponsoren;
+    }
+
+    public Stadion getStadion() {
+        return stadion;
+    }
+
+    public void setStadion(Stadion stadion) {
+        this.stadion = stadion;
+    }
+
+    public List<Speler> getSpelers() {
+        return spelers;
+    }
+
+    public void setSpelers(List<Speler> spelers) {
+        this.spelers = spelers;
+    }
+
+    public List<Competitie> getCompetities() {
+        return competities;
+    }
+
+    public void setCompetities(List<Competitie> competities) {
+        this.competities = competities;
+    }
 }

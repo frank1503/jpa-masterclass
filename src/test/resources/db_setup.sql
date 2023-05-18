@@ -1,132 +1,94 @@
-drop table if exists telefoonnummers cascade;
+drop table if exists club_sponsoren;
 
-drop table if exists x_versicherung cascade;
+drop table if exists x_speler;
 
-drop table if exists person_to_club cascade;
+drop table if exists club_competitie;
 
-drop table if exists xat403 cascade;
+drop table if exists x_voetbal_club;
 
-drop table if exists x_person_objekt cascade;
+drop table if exists x_stadion;
 
-drop table if exists xat462 cascade;
+drop table if exists x_voetbal_comp;
 
-drop table if exists insurance cascade;
+drop sequence if exists stadion_sequence;
 
-drop table if exists person_telephonenumbers cascade;
+create sequence stadion_sequence
+    increment by 50;
 
-drop table if exists person_sportsclubs cascade;
+alter sequence stadion_sequence owner to postgres;
 
-drop table if exists person cascade;
 
-drop table if exists car cascade;
-
-drop table if exists sportsclub cascade;
-
-create table car
+create table x_stadion
 (
-    registrationplate varchar(255) not null,
-    sequencenumber    integer      not null,
-    brand             varchar(255),
-    color             varchar(255),
-    primary key (registrationplate, sequencenumber)
-);
-
-alter table car
-    owner to postgres;
-
-create table person
-(
-    id                    serial
+    stadion_id         integer not null
         primary key,
-    city                  varchar(255),
-    country               varchar(255),
-    housenumber           varchar(255),
-    streetname            varchar(255),
-    zipcode               varchar(255),
-    dateofbirth           date,
-    firstname             varchar(255),
-    gender                varchar(255),
-    lastname              varchar(255),
-    car_registrationplate varchar(255),
-    car_sequencenumber    integer,
-    constraint fk5o8otu2be52jalkqsvm74qohx
-        foreign key (car_registrationplate, car_sequencenumber) references car
+    stadion_capaciteit integer,
+    stadion_naam       varchar(255)
 );
 
-alter table person
+alter table x_stadion
     owner to postgres;
 
-create table insurance
+create table x_voetbal_club
 (
-    id            serial
+    club_id   serial
         primary key,
-    pricepermonth numeric(38, 2),
-    type          varchar(255),
-    person_id     integer
-        constraint fkgprnn3lt5f3ubwpb9dlh6bet1
-            references person
+    club_land varchar(255),
+    club_stad varchar(255),
+    club_naam varchar(255),
+    stdn_id   integer
+        constraint fk27179dhmghosm7rluooqq77h9
+            references x_stadion
 );
 
-alter table insurance
+alter table x_voetbal_club
     owner to postgres;
 
-create table person_telephonenumbers
+create table club_sponsoren
 (
-    person_id        integer not null
-        constraint fkij2vg4r8c9kt8mm5he2idgyva
-            references person,
-    telephonenumbers varchar(255)
+    club_id integer not null
+        constraint fk9i63dd70dbjpqjlbn8y669pgc
+            references x_voetbal_club,
+    sponsor varchar(255)
 );
 
-alter table person_telephonenumbers
+alter table club_sponsoren
     owner to postgres;
 
-create table sportsclub
+create table x_speler
 (
-    id   serial
+    speler_naam           varchar(255) not null,
+    speler_rug_nummer     integer      not null,
+    speler_geboorte_datum date,
+    clb_id                integer
+        constraint fkj9wv8bgwc7hjkp47cdu1sae91
+            references x_voetbal_club,
+    primary key (speler_naam, speler_rug_nummer)
+);
+
+alter table x_speler
+    owner to postgres;
+
+create table x_voetbal_comp
+(
+    comp_id   serial
         primary key,
-    name varchar(255)
+    comp_naam varchar(255)
 );
 
-alter table sportsclub
+alter table x_voetbal_comp
     owner to postgres;
 
-create table person_sportsclubs
+create table club_competitie
 (
-    members_id     integer not null
-        constraint fkbdylvxu03q5p0acf1mpxkt4y4
-            references person,
-    sportsclubs_id integer not null
-        constraint fk8xectdnlwrfkqd6qi8aohsbuk
-            references sportsclub
+    club_id       integer not null
+        constraint fkqp0r408mv7qctgqpvgu0ib1rp
+            references x_voetbal_club,
+    competitie_id integer not null
+        constraint fk40uv315oyiu8ajehhpl6qqiyp
+            references x_voetbal_comp
 );
 
-alter table person_sportsclubs
+alter table club_competitie
     owner to postgres;
-
-INSERT INTO public.car (registrationplate, sequencenumber, brand, color) VALUES ('P-468-LJ', 1, 'Seat', 'Blue');
-INSERT INTO public.car (registrationplate, sequencenumber, brand, color) VALUES ('HH-DF-33', 1, 'Ford', 'Green');
-
-INSERT INTO public.person (id, city, country, housenumber, streetname, zipcode, dateofbirth, firstname, gender, lastname, car_registrationplate, car_sequencenumber) VALUES (1, 'Eindhoven', 'Nederland', '10', 'Dolphijnstraat', '5632CZ', '1986-03-15', 'Frank', 'MALE', 'Rinkens', 'P-468-LJ', 1);
-INSERT INTO public.person (id, city, country, housenumber, streetname, zipcode, dateofbirth, firstname, gender, lastname, car_registrationplate, car_sequencenumber) VALUES (2, 'Leerdam', 'Nederland', '7', 'Frederik Hendrikstraat', '4141JD', '1986-03-15', 'Rick', 'MALE', 'Roelofsen', 'HH-DF-33', 1);
-
-INSERT INTO public.person_telephonenumbers (person_id, telephonenumbers) VALUES (1, '0629731948');
-INSERT INTO public.person_telephonenumbers (person_id, telephonenumbers) VALUES (1, '0645859845');
-INSERT INTO public.person_telephonenumbers (person_id, telephonenumbers) VALUES (2, '0659485231');
-INSERT INTO public.person_telephonenumbers (person_id, telephonenumbers) VALUES (2, '0694164973');
-
-INSERT INTO public.insurance (id, pricepermonth, type, person_id) VALUES (1, 48.99, 'car', 1);
-INSERT INTO public.insurance (id, pricepermonth, type, person_id) VALUES (2, 105.99, 'house', 1);
-INSERT INTO public.insurance (id, pricepermonth, type, person_id) VALUES (3, 55.99, 'car', 2);
-INSERT INTO public.insurance (id, pricepermonth, type, person_id) VALUES (4, 155.99, 'house', 2);
-
-INSERT INTO public.sportsclub (id, name) VALUES (1, 'CobraKai');
-INSERT INTO public.sportsclub (id, name) VALUES (2, 'FC De Treffers');
-
-INSERT INTO public.person_sportsclubs (members_id, sportsclubs_id) VALUES (1, 1);
-INSERT INTO public.person_sportsclubs (members_id, sportsclubs_id) VALUES (1, 2);
-INSERT INTO public.person_sportsclubs (members_id, sportsclubs_id) VALUES (2, 1);
-INSERT INTO public.person_sportsclubs (members_id, sportsclubs_id) VALUES (2, 2);
-
-
 

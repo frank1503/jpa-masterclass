@@ -7,20 +7,25 @@ import java.time.Period;
 
 @Entity
 @IdClass(SpelerPK.class)
+@Table(name = "X_SPELER")
 public class Speler {
 
     @Id
+    @Column(name = "SPELER_NAAM")
     private String naam;
 
     @Id
+    @Column(name = "SPELER_RUG_NUMMER")
     private int rugNummer;
 
+    @Column(name = "SPELER_GEBOORTE_DATUM")
     private LocalDate geboorteDatum;
 
     @Transient
     private int leeftijd;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CLB_ID", referencedColumnName = "CLUB_ID")
     private VoetbalClub voetbalClub;
 
     public Speler() {
@@ -62,6 +67,14 @@ public class Speler {
 
     public void setLeeftijd(int leeftijd) {
         this.leeftijd = leeftijd;
+    }
+
+    public VoetbalClub getVoetbalClub() {
+        return voetbalClub;
+    }
+
+    public void setVoetbalClub(VoetbalClub voetbalClub) {
+        this.voetbalClub = voetbalClub;
     }
 
     @PostLoad
