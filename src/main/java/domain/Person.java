@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-//TODO 7 draai eerst het drop-and-create script zodat je met een schone database kan beginnen
+//TODO 7 draai eerst het drop-and-create script zodat je met een schone database kan beginnen (zie test/resources)
 @Entity
 public class Person {
     //TODO 7a zorg dat primary key automatisch gegenereerd wordt met de IDENTITY strategie
