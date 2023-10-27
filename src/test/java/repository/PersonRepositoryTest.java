@@ -27,7 +27,7 @@ class PersonRepositoryTest {
         assertThat(createdPerson.getLastName()).isEqualTo("Roelofsen");
         assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
         assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
-        //assertThat(createdPerson.getTelephoneNumbers()).hasSize(2),contains("0629731948", "0645859845");
+        //assertThat(createdPerson.getTelephoneNumbers()).hasSize(2).contains("0629731948", "0645859845");
 
         //Address createdAddress = person.getAddress();
         //assertThat(createdAddress).isNotNull();
