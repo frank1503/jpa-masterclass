@@ -27,8 +27,7 @@ public class PersonRepositoryImpl implements PersonRepository {
 
     @Override
     public void updatePerson(Person updatedPerson) {
-        Person person = entityManager.merge(updatedPerson);
-        entityManager.persist(person);
+        entityManager.merge(updatedPerson);
     }
 
     @Override
