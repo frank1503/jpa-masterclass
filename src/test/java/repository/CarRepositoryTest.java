@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CarRepositoryTest {
     private final CarRepository carRepository = new CarRepository();
 
-    //TODO 7e draai de test, deze moet slagen. Controleer in de log dat de AUDIT logging voorbij is gekomen
+    //TODO 7g draai de test, deze moet slagen. Controleer in de log dat de AUDIT logging voorbij is gekomen
     @Test
     void shouldCreateAndReadCar() {
         Car car = new Car(123, "Seat", "Blue", "P-468-LJ");

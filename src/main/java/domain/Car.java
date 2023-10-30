@@ -2,8 +2,8 @@ package domain;
 
 import jakarta.persistence.Entity;
 
-//TODO 7d zorg dat registrationPlate en sequenceNumber de primary key vormen voor Car. Gebruik de CarPK class
-//TODO 7e zorg dat de AuditTrailerListener class wordt gebruikt
+//TODO 7c zorg dat registrationPlate en sequenceNumber de primary key vormen voor Car. Gebruik de CarPK class
+//TODO 7d zorg dat de AuditTrailerListener class wordt gebruikt
 @Entity
 public class Car {
 

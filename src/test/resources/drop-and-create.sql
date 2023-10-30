@@ -1,5 +1,5 @@
-drop table person;
-drop table car;
+drop table if exists person;
+drop table if exists car;
 
 create table person
 (
