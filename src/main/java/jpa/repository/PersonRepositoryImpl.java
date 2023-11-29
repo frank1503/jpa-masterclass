@@ -39,7 +39,8 @@ public class PersonRepositoryImpl implements PersonRepository {
     }
 
     //TODO 13g Maak een TypedQuery die personen en bijbehorende sportsclubs ophaalt
-    // De relatie SportsClubs worden lazy geladen maar zorg ervoor deze toch direct geladen worden bij het ophalen van Person
+    // De relatie SportsClubs worden lazy geladen maar zorg ervoor deze toch direct geladen worden bij het ophalen van Person.
+    // sorteer het resultaat op voornaam aflopend
     // Gebruik JPQL
     @Override
     public List<Person> findPersonsWithSportClub() {
