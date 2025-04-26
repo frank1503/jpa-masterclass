@@ -11,10 +11,10 @@ import java.time.LocalDate;
 // Op het person object voegen we een Car toe en in de database krijgt de person tabel een verwijzing naar car (car_id)
 
 //TODO 4a maak de nieuwe car tabel:
-// - id
-// - type
-// - color
-// - registrationPlate
+// - id (integer)
+// - type (varchar(255))
+// - color (varchar(255))
+// - registrationplate (varchar(255))
 // voeg kolom car_id toe aan de person tabel
 // tot slot, voer car.sql script uit
 public class PersonRepository {
@@ -36,17 +36,17 @@ public class PersonRepository {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    int id = resultSet.getInt(1);
-                    String firstName = resultSet.getString(2);
-                    String lastName = resultSet.getString(3);
-                    LocalDate dateOfBirth = resultSet.getObject(4, LocalDate.class);
-                    Gender gender = Gender.valueOf(resultSet.getString(5));
+                    int id = resultSet.getInt("id");
+                    String firstName = resultSet.getString("firstname");
+                    String lastName = resultSet.getString("lastname");
+                    LocalDate dateOfBirth = resultSet.getObject("dateofbirth", LocalDate.class);
+                    Gender gender = Gender.valueOf(resultSet.getString("gender"));
 
-                    String streetName = resultSet.getString(6);
-                    String houseNumber = resultSet.getString(7);
-                    String zipCode = resultSet.getString(8);
-                    String city = resultSet.getString(9);
-                    String country = resultSet.getString(10);
+                    String streetName = resultSet.getString("streetname");
+                    String houseNumber = resultSet.getString("housenumber");
+                    String zipCode = resultSet.getString("zipcode");
+                    String city = resultSet.getString("city");
+                    String country = resultSet.getString("country");
 
                     //TODO 4c haal uit de resultSet de velden voor Car en zorg ervoor dat Car wordt geset op Person
 

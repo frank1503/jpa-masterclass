@@ -83,8 +83,8 @@ class PersonRepositoryTest {
         Person updatedPerson = repository.readPerson(2);
         assertThat(updatedPerson).isNotNull();
         assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
-        assertThat(updatedPerson.getLastName()).isEqualTo("Roelofsen");
-        assertThat(updatedPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
+        assertThat(updatedPerson.getLastName()).isEqualTo("Johnson");
+        assertThat(updatedPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1990-04-26"));
         assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
     }
 
