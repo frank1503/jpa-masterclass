@@ -24,11 +24,11 @@ public class PersonRepository {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    int id = resultSet.getInt(1);
-                    String firstName = resultSet.getString(2);
-                    String lastName = resultSet.getString(3);
-                    LocalDate dateOfBirth = resultSet.getObject(4, LocalDate.class);
-                    Gender gender = Gender.valueOf(resultSet.getString(5));
+                    int id = resultSet.getInt("id");
+                    String firstName = resultSet.getString("firstname");
+                    String lastName = resultSet.getString("lastname");
+                    LocalDate dateOfBirth = resultSet.getObject("dateofbirth", LocalDate.class);
+                    Gender gender = Gender.valueOf(resultSet.getString("gender"));
 
                     person = new Person(id, firstName, lastName, dateOfBirth, gender);
                 }
@@ -55,7 +55,7 @@ public class PersonRepository {
     }
 
     public void updateFirstName(String firstName, int id) throws SQLException {
-        String sql = "update person set first_name = ? where id = ?";
+        String sql = "update person set firstname = ? where id = ?";
 
         try (
                 Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
