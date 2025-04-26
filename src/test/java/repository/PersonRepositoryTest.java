@@ -48,8 +48,8 @@ class PersonRepositoryTest {
 
     @Test
     void shouldDelete() throws SQLException {
-        repository.deletePerson(2);
-        Person deletedPerson = repository.readPerson(2);
+        repository.deletePerson(1);
+        Person deletedPerson = repository.readPerson(1);
         assertThat(deletedPerson).isNull();
     }
 }
