@@ -27,24 +27,24 @@ public class PersonRepository {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    int personId = resultSet.getInt(1);
-                    String firstName = resultSet.getString(2);
-                    String lastName = resultSet.getString(3);
-                    LocalDate dateOfBirth = resultSet.getObject(4, LocalDate.class);
-                    Gender gender = Gender.valueOf(resultSet.getString(5));
+                    int personId = resultSet.getInt("id");
+                    String firstName = resultSet.getString("firstname");
+                    String lastName = resultSet.getString("lastname");
+                    LocalDate dateOfBirth = resultSet.getObject("dateofbirth", LocalDate.class);
+                    Gender gender = Gender.valueOf(resultSet.getString("gender"));
 
-                    String streetName = resultSet.getString(6);
-                    String houseNumber = resultSet.getString(7);
-                    String zipCode = resultSet.getString(8);
-                    String city = resultSet.getString(9);
-                    String country = resultSet.getString(10);
+                    String streetName = resultSet.getString("streetname");
+                    String houseNumber = resultSet.getString("housenumber");
+                    String zipCode = resultSet.getString("zipcode");
+                    String city = resultSet.getString("city");
+                    String country = resultSet.getString("country");
 
-                    int carId = resultSet.getInt(12);
-                    String type = resultSet.getString(13);
-                    String colors = resultSet.getString(14);
-                    String registrationPlate = resultSet.getString(15);
+                    int carId = resultSet.getInt("car_id");
+                    String type = resultSet.getString("type");
+                    String color = resultSet.getString("color");
+                    String registrationPlate = resultSet.getString("registrationplate");
 
-                    Car car = new Car(carId, type, colors, registrationPlate);
+                    Car car = new Car(carId, type, color, registrationPlate);
                     Address address = new Address(streetName, houseNumber, zipCode, city, country);
                     person = new Person(personId, firstName, lastName, dateOfBirth, gender, address);
                     person.setCar(car);

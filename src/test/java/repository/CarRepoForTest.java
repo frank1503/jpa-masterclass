@@ -20,10 +20,10 @@ public class CarRepoForTest {
             preparedStatement.setInt(1, primaryKey);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    int id = resultSet.getInt(1);
-                    String type = resultSet.getString(2);
-                    String color = resultSet.getString(3);
-                    String registrationPlate = resultSet.getString(4);
+                    int id = resultSet.getInt("id");
+                    String type = resultSet.getString("type");
+                    String color = resultSet.getString("color");
+                    String registrationPlate = resultSet.getString("registrationplate");
 
                     car = new Car(id, type, color, registrationPlate);
                 }
