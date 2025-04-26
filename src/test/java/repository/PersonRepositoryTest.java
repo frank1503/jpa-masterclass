@@ -25,13 +25,13 @@ class PersonRepositoryTest {
     //TODO 2c De test moet nu slagen
     @Test
     void shouldCreatePerson() throws SQLException {
-        Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+        Person person = new Person(2, "John", "Johnson", LocalDate.parse("1990-04-26"), Gender.MALE);
         repository.createPerson(person);
         Person createdPerson = repository.readPerson(2);
         assertThat(createdPerson).isNotNull();
-        assertThat(createdPerson.getFirstName()).isEqualTo("Rick");
-        assertThat(createdPerson.getLastName()).isEqualTo("Roelofsen");
-        assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
+        assertThat(createdPerson.getFirstName()).isEqualTo("John");
+        assertThat(createdPerson.getLastName()).isEqualTo("Johnson");
+        assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1990-04-26"));
         assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
     }
 
@@ -43,8 +43,8 @@ class PersonRepositoryTest {
         Person updatedPerson = repository.readPerson(2);
         assertThat(updatedPerson).isNotNull();
         assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
-        assertThat(updatedPerson.getLastName()).isEqualTo("Roelofsen");
-        assertThat(updatedPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
+        assertThat(updatedPerson.getLastName()).isEqualTo("Johnson");
+        assertThat(updatedPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1990-04-26"));
         assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
     }
 
