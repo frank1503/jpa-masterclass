@@ -11,11 +11,11 @@ import java.time.LocalDate;
 // Het Address is een apart object maar in de database zitten de address velden in de person tabel (data clump)
 
 //TODO 3a breid eerst de person tabel uit met de volgende velden:
-// - streetname
-// - housenumber
-// - zipcode
-// - city
-// - country
+// - streetname (varchar(255))
+// - housenumber (varchar(255))
+// - zipcode (varchar(255))
+// - city (varchar(255))
+// - country (varchar(255))
 // controleer voor de zekerheid dat Person met id = 1 niet in de tabel zit
 // voer daarna het person.sql script uit (test -> java -> resources)
 public class PersonRepository {
@@ -36,11 +36,11 @@ public class PersonRepository {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    int id = resultSet.getInt(1);
-                    String firstName = resultSet.getString(2);
-                    String lastName = resultSet.getString(3);
-                    LocalDate dateOfBirth = resultSet.getObject(4, LocalDate.class);
-                    Gender gender = Gender.valueOf(resultSet.getString(5));
+                    int id = resultSet.getInt("id");
+                    String firstName = resultSet.getString("firstname");
+                    String lastName = resultSet.getString("lastname");
+                    LocalDate dateOfBirth = resultSet.getObject("dateofbirth", LocalDate.class);
+                    Gender gender = Gender.valueOf(resultSet.getString("gender"));
 
                     //TODO 3b haal uit de resultSet de velden voor Address en maak het Person object
                 }
