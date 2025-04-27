@@ -16,16 +16,16 @@ class PersonRepositoryTest {
     @Test
     void shouldCreateAndReadPerson() {
         Address address = new Address("Frederik Hendrikstraat", "7", "4141JD", "Leerdam", "Nederland");
-        Person person = new Person(2, "Rick", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+        Person person = new Person(2, "John", "Johnson", LocalDate.parse("1990-04-26"), Gender.MALE);
         //person.setAddress(address);
         //person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
         repository.createPerson(person);
 
         Person createdPerson = repository.readPerson(2);
         assertThat(createdPerson).isNotNull();
-        assertThat(createdPerson.getFirstName()).isEqualTo("Rick");
-        assertThat(createdPerson.getLastName()).isEqualTo("Roelofsen");
-        assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
+        assertThat(createdPerson.getFirstName()).isEqualTo("John");
+        assertThat(createdPerson.getLastName()).isEqualTo("Johnson");
+        assertThat(createdPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1990-04-26"));
         assertThat(createdPerson.getGender()).isEqualTo(Gender.MALE);
         //assertThat(createdPerson.getTelephoneNumbers()).hasSize(2).contains("0629731948", "0645859845");
 
@@ -42,7 +42,7 @@ class PersonRepositoryTest {
     @Test
     void shouldUpdatePerson() {
         Address address = new Address("Dorpstraat", "1a", "5504HK", "Veldhoven", "Nederland");
-        Person person = new Person(2, "Willy", "Roelofsen", LocalDate.parse("1986-03-15"), Gender.MALE);
+        Person person = new Person(2, "Willy", "Johnson", LocalDate.parse("1990-04-26"), Gender.MALE);
         //person.setAddress(address);
         //person.setTelephoneNumbers(List.of("0629731948", "0645859845"));
         repository.updatePerson(person);
@@ -50,8 +50,8 @@ class PersonRepositoryTest {
         Person updatedPerson = repository.readPerson(2);
         assertThat(updatedPerson).isNotNull();
         assertThat(updatedPerson.getFirstName()).isEqualTo("Willy");
-        assertThat(updatedPerson.getLastName()).isEqualTo("Roelofsen");
-        assertThat(updatedPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1986-03-15"));
+        assertThat(updatedPerson.getLastName()).isEqualTo("Johnson");
+        assertThat(updatedPerson.getDateOfBirth()).isEqualTo(LocalDate.parse("1990-04-26"));
         assertThat(updatedPerson.getGender()).isEqualTo(Gender.MALE);
         //assertThat(updatedPerson.getTelephoneNumbers()).hasSize(2).contains("0629731948", "0645859845");
 
