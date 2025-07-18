@@ -10,11 +10,6 @@ public class CarPK implements Serializable {
     public CarPK() {
     }
 
-    public CarPK(int sequenceNumber, String registrationPlate) {
-        this.sequenceNumber = sequenceNumber;
-        this.registrationPlate = registrationPlate;
-    }
-
     public int getSequenceNumber() {
         return sequenceNumber;
     }
