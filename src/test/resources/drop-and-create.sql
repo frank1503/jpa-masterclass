@@ -1,3 +1,4 @@
+drop table if exists person_telephonenumbers;
 drop table if exists person;
 drop table if exists car;
 
