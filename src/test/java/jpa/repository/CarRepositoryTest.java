@@ -44,7 +44,7 @@ public class CarRepositoryTest {
 //        assertThat(createdPerson).isNotNull();
 //        assertThat(createdPerson.getFirstName()).isEqualTo("Frank");
 //        assertThat(createdPerson.getTelephoneNumbers()).hasSize(2);
-//        assertThat(createdPerson.getAge()).isEqualTo(37);
+//        assertThat(createdPerson.getAge()).isEqualTo(39);
     }
 
     //TODO 10g haal de code uit commentaar en draai de unit test. Deze moeten slagen
