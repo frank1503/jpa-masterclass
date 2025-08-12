@@ -13,7 +13,7 @@ public class SportsClubRepositoryImpl implements SportsClubRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    //TODO 11h implementeer de methode zodat de club wordt opgeslagen
+    // TODO 11h implementeer de methode zodat de club wordt opgeslagen
     @Override
     public int addSportsClub(SportsClub sportsClub) {
         //return id van sportsClub ipv 0

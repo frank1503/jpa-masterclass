@@ -30,7 +30,7 @@ class PersonRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
-    //TODO 11l haal de code uit commentaar en draai de test. deze moet slagen
+    // TODO 11l haal de code uit commentaar en draai de test. deze moet slagen
     @Test
     void shouldCreateAndReadPerson() {
 //        SportsClub soccerClub = new SportsClub("FC De Treffers");
@@ -87,7 +87,7 @@ class PersonRepositoryTest {
 //        assertThat(createdCar.getColor()).isEqualTo("Blue");
     }
 
-    //TODO 11m haal de code uit commentaar en draai de test. deze moet slagen
+    // TODO 11m haal de code uit commentaar en draai de test. deze moet slagen
     @Test
     void shouldDeletePerson() {
 //        Insurance carInsurance = new Insurance("Car", new BigDecimal("85.99"));

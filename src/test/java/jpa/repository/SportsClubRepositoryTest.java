@@ -30,7 +30,7 @@ public class SportsClubRepositoryTest {
     @Autowired
     private EntityManager entityManager;
 
-    //TODO 11k haal de code uit commentaar en draai de test, deze moet slagen
+    // TODO 11k haal de code uit commentaar en draai de test, deze moet slagen
     @Test
     @Sql("/add-person.sql")
     void shouldAddSportsClub() {

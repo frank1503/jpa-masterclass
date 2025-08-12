@@ -30,11 +30,11 @@ public class Person {
     )
     private Car car;
 
-    //TODO 11b voeg hier ook de bidirectionele relatie met Insurance toe
+    // TODO 11b voeg hier ook de bidirectionele relatie met Insurance toe
     // insurances: List<Insurance>
 
 
-    //TODO 11f voeg hier ook de bidirectione relatie met SportsClub toe
+    // TODO 11f voeg hier ook de bidirectione relatie met SportsClub toe
     // sportsClubs: List<SportsClub>
 
 

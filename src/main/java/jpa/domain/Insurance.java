@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
-//TODO 11a Draai eerst setup.sql
+// TODO 11a Draai eerst setup.sql
 // maak de Insurance entity af
 // id: int (PK) genereer met de IDENTITY strategy
 // type: String
