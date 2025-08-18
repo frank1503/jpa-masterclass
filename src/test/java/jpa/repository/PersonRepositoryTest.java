@@ -101,7 +101,7 @@ class PersonRepositoryTest {
 //        car.setPerson(person);
 //        carInsurance.setPerson(person);
 //        houseInsurance.setPerson(person);
-//        //person.setInsurances(List.of(carInsurance, houseInsurance));
+//        person.setInsurances(List.of(carInsurance, houseInsurance));
 //
 //        int id = personRepository.createPerson(person);
 //        entityManager.flush();
